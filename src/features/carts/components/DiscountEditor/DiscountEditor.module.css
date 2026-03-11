@@ -1,0 +1,138 @@
+/* src/features/carts/components/DiscountEditor/DiscountEditor.module.css */
+.container {
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  background: var(--background);
+}
+
+.container h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.discountInput {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.slider {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* Propriedade padrão adicionada */
+  background: var(--sidebarBorder);
+  border-radius: var(--border-radius-full);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: none;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+.discountValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 100px;
+}
+
+.numberInput {
+  width: 60px;
+  padding: 4px;
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-sm);
+  background: var(--background);
+  color: var(--textPrimary);
+  text-align: center;
+}
+
+.numberInput:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.applyButton {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 2px solid var(--warning);
+  border-radius: var(--border-radius-lg);
+  background: transparent;
+  color: var(--warning);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  margin-bottom: var(--spacing-md);
+}
+
+.applyButton:hover:not(:disabled) {
+  background: var(--warning);
+  color: white;
+}
+
+.applyButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.result {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm);
+}
+
+.resultRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.discountAmount {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.resultRow.final {
+  border-top: 1px solid var(--sidebarBorder);
+  margin-top: 4px;
+  padding-top: 8px;
+  font-weight: 700;
+  color: var(--textPrimary);
+}
+
+.resultRow.final span:last-child {
+  color: var(--success);
+}

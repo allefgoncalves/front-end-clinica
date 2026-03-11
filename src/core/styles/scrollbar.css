@@ -1,0 +1,61 @@
+/* src/core/styles/scrollbar.css */
+/* Scrollbar Global Padronizada para toda a aplicação */
+
+/* ===== Webkit (Chrome, Safari, Edge) ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accentSoft);
+  border-radius: var(--border-radius-full);
+  border: none;
+  transition: var(--transition-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accentSoft) transparent;
+}
+
+/* ===== Remover setinhas de inputs numéricos ===== */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* ===== Ajustes específicos para tabelas ===== */
+.table-scrollable {
+  overflow-y: auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accentSoft) transparent;
+}

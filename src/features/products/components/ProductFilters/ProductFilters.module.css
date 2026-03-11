@@ -1,0 +1,247 @@
+/* src/features/products/components/ProductFilters/ProductFilters.module.css */
+.searchBar {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.searchBox {
+  flex: 1;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-right: 50px;
+  border-radius: var(--border-radius-xl);
+  border: 2px solid transparent;
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+
+.clearSearch {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--textSecondary);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  transition: var(--transition-smooth);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearSearch:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.filterToggle {
+  padding: 0 var(--spacing-xl);
+  border-radius: var(--border-radius-xl);
+  border: 2px solid transparent;
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.filterToggle:hover,
+.filterToggle.active {
+  background: var(--accentLight);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.filtersPanel {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.filterGroup label {
+  font-weight: 600;
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid transparent;
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.select:hover {
+  border-color: var(--accentLight);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--textPrimary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition-smooth);
+}
+
+.checkboxLabel:hover {
+  background: var(--accentLight);
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.filterActions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.clearButton {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--border-radius-xl);
+  border: 2px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.clearButton:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-xl);
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+  animation: fadeIn 0.3s ease;
+}
+
+.filterTag {
+  background: var(--accentLight);
+  color: var(--accent);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.thresholdInfo {
+  font-size: var(--font-size-xs);
+  color: var(--textSecondary);
+  margin-left: 24px; 
+  display: block;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+/* Ajuste para o checkbox text */
+.checkboxText {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start; 
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition-smooth);
+}
+
+.checkboxLabel input[type="checkbox"] {
+  margin-top: 2px; 
+}

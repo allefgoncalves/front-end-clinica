@@ -1,0 +1,375 @@
+/* src/features/products/components/ProductForm/ProductForm.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-xl);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--sidebarBorder);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--sidebar);
+  z-index: 1;
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.modalHeader h2 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-xl);
+  margin: 0;
+  font-weight: 600;
+}
+
+.closeButton {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-full);
+  border: none;
+  background: var(--background);
+  color: var(--textSecondary);
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.closeButton:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  transform: rotate(90deg);
+}
+
+.form {
+  padding: var(--spacing-xl);
+}
+
+/* Estilo base para todos os form groups */
+.formGroup {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--textSecondary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+  min-height: 20px; /* Altura fixa para o label */
+}
+
+/* Grupo especial para checkbox - sem label superior */
+.checkboxGroup {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label invisível para manter a mesma altura */
+.checkboxGroup .hiddenLabel {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: transparent;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+  min-height: 20px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Container do checkbox */
+.checkboxContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Checkbox personalizado */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid transparent;
+  transition: var(--transition-smooth);
+  width: 100%;
+  margin: 0;
+}
+
+.checkbox:hover {
+  background: var(--navHover);
+  border-color: var(--accentLight);
+}
+
+.checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--accent);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.checkbox span {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid transparent;
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  font-family: inherit;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.formGroup input:hover,
+.formGroup textarea:hover,
+.formGroup select:hover {
+  background: var(--navHover);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Estilo específico para o select de categorias */
+.select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid transparent;
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.select:hover {
+  background-color: var(--navHover);
+  border-color: var(--accentLight);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.select option {
+  background: var(--background);
+  color: var(--textPrimary);
+  padding: var(--spacing-md);
+}
+
+/* Ações do formulário */
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--sidebarBorder);
+  position: sticky;
+  bottom: 0;
+  background: var(--sidebar);
+  padding-bottom: var(--spacing-xs);
+}
+
+.cancelButton,
+.saveButton {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  border: none;
+  font-size: var(--font-size-md);
+  min-width: 140px;
+}
+
+.cancelButton {
+  background: var(--background);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+}
+
+.cancelButton:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  transform: translateY(-2px);
+  border-color: var(--danger);
+}
+
+.saveButton {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.saveButton:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: var(--textSecondary);
+  opacity: 0.5;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    margin: var(--spacing-md);
+  }
+  
+  .modalHeader {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  .modalHeader h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .form {
+    padding: var(--spacing-lg);
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+  
+  .formActions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .closeButton {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .checkbox {
+    justify-content: flex-start;
+  }
+}
+
+/* Scrollbar personalizada para o modal */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 0 0 var(--border-radius-xl) 0;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--accentSoft);
+  border-radius: var(--border-radius-full);
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

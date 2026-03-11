@@ -1,0 +1,29 @@
+########################
+app - gerral
+########################
+
+-
+
+#####################
+products
+#####################
+
+1- botão novo produto e editar produto,
+        mostra a parte de cadastro a baixo da pagina na edição tendo que preecher todos os dados novamente 
+    correção:
+        criar card para cadastro e ajustar o da edição com os dados ja preenchidos
+
+- adicionar codgo de barras aos produtos
+
+#########################
+layout
+#########################
+
+-
+
+
+########################
+carrinho
+########################
+
+-ao salvar comentarios não é possivel salvar sem comentarios ou apagar  

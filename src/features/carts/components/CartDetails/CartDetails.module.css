@@ -1,0 +1,211 @@
+/* src/features/carts/components/CartDetails/CartDetails.module.css */
+.container {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+}
+
+.container.embedded {
+  padding: 0;
+  background: transparent;
+}
+
+.header {
+  border-bottom: 1px solid var(--sidebarBorder);
+  padding-bottom: var(--spacing-md);
+}
+
+.header h2 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.userAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-full);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.userName {
+  font-weight: 600;
+  color: var(--textPrimary);
+}
+
+.userEmail {
+  font-size: var(--font-size-xs);
+  color: var(--textSecondary);
+}
+
+/* Cards de itens */
+.itemsSection {
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  background: var(--background);
+}
+
+.itemsSection h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
+}
+
+.itemCard {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  padding: var(--spacing-md);
+  transition: var(--transition-smooth);
+}
+
+.itemCard:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.itemCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.itemCardType {
+  font-size: var(--font-size-lg);
+}
+
+.itemCardName {
+  flex: 1;
+  font-weight: 600;
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+}
+
+.itemCardDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+  margin-left: 32px;
+}
+
+.itemCardTotal {
+  font-weight: 700;
+  color: var(--success);
+}
+
+/* Observações */
+.notesSection {
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  background: var(--background);
+}
+
+.notesSection h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.notesInput {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+  resize: vertical;
+  margin-bottom: var(--spacing-sm);
+}
+
+.notesInput:focus {
+  outline: none;
+  border-color: var(--info);
+  box-shadow: 0 0 0 2px var(--info-light);
+}
+
+/* CORREÇÃO 6: Botão com cores do tema */
+.saveNotesButton {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--info);
+  background: transparent;
+  color: var(--info);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.saveNotesButton:hover:not(:disabled) {
+  background: var(--info);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.saveNotesButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Scrollbar para a grid de itens */
+.itemsGrid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.itemsGrid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.itemsGrid::-webkit-scrollbar-thumb {
+  background: var(--accentSoft);
+  border-radius: var(--border-radius-full);
+}
+
+.itemsGrid::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .discountRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .itemsGrid {
+    grid-template-columns: 1fr;
+  }
+}

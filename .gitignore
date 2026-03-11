@@ -1,0 +1,198 @@
+# === DEPENDÊNCIAS ===
+node_modules/
+.pnp
+.pnp.js
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# === BUILD ===
+dist/
+dist-ssr/
+*.local
+build/
+out/
+output/
+
+# === AMBIENTE ===
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
+.env.test
+.env.development.local
+.env.production.local
+.env.staging.local
+.env.test.local
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/extensions.json
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/dataSources
+.idea/dataSources.ids
+.idea/caches/
+.idea/modules.xml
+.idea/vcs.xml
+*.iml
+*.ipr
+*.iws
+
+# === LOGS ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+logs/
+*.log
+
+# === TESTES ===
+coverage/
+.nyc_output/
+reports/
+test-results/
+junit.xml
+*.tap
+
+# === CACHE ===
+.cache/
+.vite/
+.turbo/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# === ARQUIVOS DE SISTEMA ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.dll
+
+# === ARQUIVOS DO EDITOR ===
+*.sublime-*
+*.sublime-workspace
+*.sublime-project
+
+# === ARQUIVOS DE MÍDIA GERADOS ===
+uploads/
+public/uploads/
+public/images/generated/
+assets/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.ico
+*.svg
+!src/assets/
+!public/favicon.ico
+!public/logo.svg
+!public/logo.png
+!public/images/logo.png
+
+# === ARQUIVOS DE BACKUP ===
+*.bak
+*.backup
+*.old
+*.orig
+
+# === ARQUIVOS TEMPORÁRIOS ===
+tmp/
+temp/
+*.tmp
+*.temp
+
+# === RELATÓRIOS ===
+reports/
+stats.html
+bundle-analysis.html
+
+# === ARQUIVOS DE CHAVE/SENHA ===
+*.pem
+*.key
+*.crt
+*.p12
+secrets/
+keys/
+
+# === VERSÃO DO NODE ===
+.nvmrc
+.node-version
+
+# === ARQUIVOS DO DOCKER ===
+.dockerignore
+Dockerfile.dev
+docker-compose.override.yml
+
+# === ARQUIVOS DO GITHUB ACTIONS ===
+.github/workflows/*.local
+
+# === PASTAS ESPECÍFICAS DO PROJETO ===
+# Configurações locais
+src/config/local.ts
+src/config/development.ts
+src/config/production.ts
+!src/config/index.ts
+
+# Serviços específicos
+src/services/*.local.ts
+
+# Tipos gerados
+src/types/generated/
+src/generated/
+
+# PWA
+dist-pwa/
+sw.js
+sw.js.map
+workbox-*.js
+
+# Storybook
+storybook-static/
+*.storybook.log
+
+# Cobertura de testes
+coverage/
+.husky/_
+
+# Arquivos de ambiente do Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+cypress/fixtures/*.local.json
+!cypress/fixtures/example.json
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Arquivos de certificado local
+*.cert
+*.pem
+ssl/
+certificates/
+
+# Arquivos de banco de dados local
+*.db
+*.sqlite
+*.sqlite3
+database.sqlite
+database.sqlite3

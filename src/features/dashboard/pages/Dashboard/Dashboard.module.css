@@ -1,0 +1,299 @@
+/* src/features/dashboard/pages/Dashboard/Dashboard.module.css */
+.container {
+  padding: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--textPrimary);
+  position: relative;
+  padding-left: var(--spacing-lg);
+}
+
+.header h1::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accentSoft) 100%);
+  border-radius: var(--border-radius-full);
+}
+
+.timeRangeSelector {
+  display: flex;
+  gap: var(--spacing-xs);
+  background: var(--sidebar);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--sidebarBorder);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeRangeSelector button {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  color: var(--textSecondary);
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.timeRangeSelector button:hover {
+  color: var(--accent);
+  background: var(--accentLight);
+}
+
+.timeRangeSelector button.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.statCard {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  transition: var(--transition-bounce);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: var(--accentLight);
+  border-radius: 50%;
+  transform: translate(30px, -30px);
+  opacity: 0.3;
+}
+
+.statCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.statIcon {
+  font-size: 3rem;
+  background: var(--background);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-xl);
+  color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.statInfo h3 {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  color: var(--textPrimary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.statChange {
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.statChange.positive {
+  color: var(--success);
+}
+
+.statChange.negative {
+  color: var(--danger);
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.chartCard {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+}
+
+.chartCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.chartCard h2 {
+  color: var(--textPrimary);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.chartCard h2::before {
+  content: '📊';
+  font-size: var(--font-size-xl);
+}
+
+.recentAppointments {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.recentAppointments h2 {
+  color: var(--textPrimary);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.recentAppointments h2::before {
+  content: '📅';
+  font-size: var(--font-size-xl);
+}
+
+.appointmentsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.appointmentsTable th {
+  text-align: left;
+  padding: var(--spacing-md) var(--spacing-md);
+  color: var(--textSecondary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  border-bottom: 2px solid var(--sidebarBorder);
+}
+
+.appointmentsTable td {
+  padding: var(--spacing-md) var(--spacing-md);
+  color: var(--textPrimary);
+  border-bottom: 1px solid var(--sidebarBorder);
+}
+
+.appointmentsTable tbody tr {
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.appointmentsTable tbody tr:hover {
+  background: var(--navHover);
+  transform: scale(1.01);
+  box-shadow: var(--shadow-sm);
+}
+
+.status {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.confirmed {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.status.pending {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.status.cancelled {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.dashboardLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  gap: var(--spacing-lg);
+  color: var(--textSecondary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+  
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .appointmentsTable {
+    font-size: var(--font-size-sm);
+  }
+  
+  .appointmentsTable th,
+  .appointmentsTable td {
+    padding: var(--spacing-sm);
+  }
+}

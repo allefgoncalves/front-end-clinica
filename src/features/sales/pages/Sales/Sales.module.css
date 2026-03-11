@@ -1,0 +1,114 @@
+/* src/features/sales/pages/Sales/Sales.module.css */
+.container {
+  padding: var(--spacing-md) var(--spacing-lg);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  animation: fadeIn 0.5s ease-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  flex-shrink: 0;
+  min-width: 800px;
+}
+
+.header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--textPrimary);
+  position: relative;
+  padding-left: var(--spacing-md);
+}
+
+.header h1::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accentSoft) 100%);
+  border-radius: var(--border-radius-full);
+}
+
+.tableContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-top: var(--spacing-sm);
+  width: 100%;
+  min-width: 800px;
+}
+
+.infoBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  box-shadow: var(--shadow-sm);
+}
+
+.itemCount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xs);
+}
+
+.countNumber {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.countLabel {
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+}
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  padding: var(--spacing-3xl);
+  text-align: center;
+  color: var(--textSecondary);
+  font-size: var(--font-size-lg);
+  min-height: 400px;
+}
+
+.subText {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+  opacity: 0.8;
+}

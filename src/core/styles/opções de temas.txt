@@ -1,0 +1,479 @@
+/* =====================================================
+   1️⃣ Calmante Verde (verde chá claro)
+   ===================================================== */
+export const calmanteVerde = {
+  light: {
+    "--background": "#EAF4EF",
+    "--sidebar": "#DCEAE4",
+    "--sidebarBorder": "#C8DDD5",
+    "--textPrimary": "#2F3E34",
+    "--textSecondary": "#5F7468",
+    "--navHover": "#D4E7DE",
+    "--navActive": "#BFDACD",
+    "--accent": "#6FAF98",
+    "--accentSoft": "#9FD3C2",
+    "--accentLight": "rgba(111, 175, 152, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1E2A24",
+    "--sidebar": "#24332C",
+    "--sidebarBorder": "#2E3F37",
+    "--textPrimary": "#EAF4EF",
+    "--textSecondary": "#A9C0B6",
+    "--navHover": "#2F4037",
+    "--navActive": "#3F5A4E",
+    "--accent": "#6FAF98",
+    "--accentSoft": "#4E7F6E",
+    "--accentLight": "rgba(111, 175, 152, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   2️⃣ Relaxamento Azul (azul gelo suave)
+   ===================================================== */
+export const relaxamentoAzul = {
+  light: {
+    "--background": "#EAF3F9",
+    "--sidebar": "#DCE9F4",
+    "--sidebarBorder": "#C7DBEA",
+    "--textPrimary": "#2B3A42",
+    "--textSecondary": "#607480",
+    "--navHover": "#D3E5F2",
+    "--navActive": "#BBD7E8",
+    "--accent": "#5DADE2",
+    "--accentSoft": "#9ED0F2",
+    "--accentLight": "rgba(93, 173, 226, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1C2630",
+    "--sidebar": "#23313D",
+    "--sidebarBorder": "#2F3F4C",
+    "--textPrimary": "#EAF2F8",
+    "--textSecondary": "#AFC3D4",
+    "--navHover": "#2A3A48",
+    "--navActive": "#3A5366",
+    "--accent": "#5DADE2",
+    "--accentSoft": "#3E7BA8",
+    "--accentLight": "rgba(93, 173, 226, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   3️⃣ Natureza Zen (verde oliva claro)
+   ===================================================== */
+export const naturezaZen = {
+  light: {
+    "--background": "#F1F4E8",
+    "--sidebar": "#E2E8CF",
+    "--sidebarBorder": "#D3DDB6",
+    "--textPrimary": "#3A4032",
+    "--textSecondary": "#6F775A",
+    "--navHover": "#DCE4C0",
+    "--navActive": "#C9D7A3",
+    "--accent": "#8DAA5A",
+    "--accentSoft": "#B8C98D",
+    "--accentLight": "rgba(141, 170, 90, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#23261D",
+    "--sidebar": "#2C3024",
+    "--sidebarBorder": "#3A3F2E",
+    "--textPrimary": "#EEF0E5",
+    "--textSecondary": "#B8C19B",
+    "--navHover": "#333826",
+    "--navActive": "#4A5135",
+    "--accent": "#8DAA5A",
+    "--accentSoft": "#6E8443",
+    "--accentLight": "rgba(141, 170, 90, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   4️⃣ Spa Minimalista (cinza quente claro)
+   ===================================================== */
+export const spaMinimalista = {
+  light: {
+    "--background": "#F2F1EF",
+    "--sidebar": "#E6E4E1",
+    "--sidebarBorder": "#D8D5D1",
+    "--textPrimary": "#333333",
+    "--textSecondary": "#6E6E6E",
+    "--navHover": "#E0DEDB",
+    "--navActive": "#D2CFCA",
+    "--accent": "#9FB7AE",
+    "--accentSoft": "#C8D8D3",
+    "--accentLight": "rgba(159, 183, 174, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1F1F1F",
+    "--sidebar": "#262626",
+    "--sidebarBorder": "#333333",
+    "--textPrimary": "#F2F2F2",
+    "--textSecondary": "#BDBDBD",
+    "--navHover": "#2F2F2F",
+    "--navActive": "#3D3D3D",
+    "--accent": "#8FB3A8",
+    "--accentSoft": "#5E7C73",
+    "--accentLight": "rgba(143, 179, 168, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   5️⃣ Lavanda Suave (lilás claro)
+   ===================================================== */
+export const lavanda = {
+  light: {
+    "--background": "#F3EFFA",
+    "--sidebar": "#E7E0F4",
+    "--sidebarBorder": "#D9CFEC",
+    "--textPrimary": "#3E3550",
+    "--textSecondary": "#786A9A",
+    "--navHover": "#E0D6F2",
+    "--navActive": "#CDBDEB",
+    "--accent": "#9C88D6",
+    "--accentSoft": "#C5B6F0",
+    "--accentLight": "rgba(156, 136, 214, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#231F2B",
+    "--sidebar": "#2C2736",
+    "--sidebarBorder": "#3A3347",
+    "--textPrimary": "#F1ECF8",
+    "--textSecondary": "#C6B8E0",
+    "--navHover": "#322C3D",
+    "--navActive": "#4A4160",
+    "--accent": "#9575CD",
+    "--accentSoft": "#6E57A3",
+    "--accentLight": "rgba(149, 117, 205, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   6️⃣ Tropical Suave (verde água claro)
+   ===================================================== */
+export const tropical = {
+  light: {
+    "--background": "#E8F6F2",
+    "--sidebar": "#D6EFE8",
+    "--sidebarBorder": "#C2E4DA",
+    "--textPrimary": "#2E4037",
+    "--textSecondary": "#5F8C7B",
+    "--navHover": "#CDEAE0",
+    "--navActive": "#B7DFD3",
+    "--accent": "#4DBD94",
+    "--accentSoft": "#7FD9BA",
+    "--accentLight": "rgba(77, 189, 148, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1B2A24",
+    "--sidebar": "#22362E",
+    "--sidebarBorder": "#2F4A3F",
+    "--textPrimary": "#EAF7F0",
+    "--textSecondary": "#A8D5C2",
+    "--navHover": "#29443A",
+    "--navActive": "#3C6656",
+    "--accent": "#4DBD94",
+    "--accentSoft": "#2F8F6F",
+    "--accentLight": "rgba(77, 189, 148, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   7️⃣ Areia e Oceano (bege areia)
+   ===================================================== */
+export const areiaOceano = {
+  light: {
+    "--background": "#F3EDE3",
+    "--sidebar": "#E8DFD0",
+    "--sidebarBorder": "#D8CDB9",
+    "--textPrimary": "#3F3A33",
+    "--textSecondary": "#7C7367",
+    "--navHover": "#E0D6C4",
+    "--navActive": "#D0C2A9",
+    "--accent": "#4FB3B3",
+    "--accentSoft": "#9FDCDC",
+    "--accentLight": "rgba(79, 179, 179, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1E2326",
+    "--sidebar": "#252D30",
+    "--sidebarBorder": "#313B40",
+    "--textPrimary": "#EEF3F5",
+    "--textSecondary": "#B7C6CC",
+    "--navHover": "#2D383D",
+    "--navActive": "#3E525A",
+    "--accent": "#4FB3B3",
+    "--accentSoft": "#2E7C7C",
+    "--accentLight": "rgba(79, 179, 179, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   8️⃣ Rosa Calmante (rosa chá)
+   ===================================================== */
+export const rosaCalmante = {
+  light: {
+    "--background": "#FCEFF3",
+    "--sidebar": "#F8E1E8",
+    "--sidebarBorder": "#EFD0D8",
+    "--textPrimary": "#4A3A3F",
+    "--textSecondary": "#8C6F76",
+    "--navHover": "#F5DCE4",
+    "--navActive": "#EBC4D1",
+    "--accent": "#D16D9E",
+    "--accentSoft": "#F2A7C6",
+    "--accentLight": "rgba(209, 109, 158, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#2A1F23",
+    "--sidebar": "#33262B",
+    "--sidebarBorder": "#433238",
+    "--textPrimary": "#FCECF1",
+    "--textSecondary": "#E1B8C6",
+    "--navHover": "#3A2C31",
+    "--navActive": "#5A3F47",
+    "--accent": "#D16D9E",
+    "--accentSoft": "#9C4D73",
+    "--accentLight": "rgba(209, 109, 158, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   9️⃣ Madeira e Folhagem (areia oliva) - TEMA PADRÃO
+   ===================================================== */
+export const madeiraFolhagem = {
+  light: {
+    "--background": "#EFE9DD",
+    "--sidebar": "#E2D8C6",
+    "--sidebarBorder": "#D2C4AB",
+    "--textPrimary": "#3B3A34",
+    "--textSecondary": "#7F7A6F",
+    "--navHover": "#DDD2BE",
+    "--navActive": "#CBB994",
+    "--accent": "#6E8B3D",
+    "--accentSoft": "#9EB874",
+    "--accentLight": "rgba(110, 139, 61, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#23221D",
+    "--sidebar": "#2C2A24",
+    "--sidebarBorder": "#3A382F",
+    "--textPrimary": "#F1EFE8",
+    "--textSecondary": "#C5C1B2",
+    "--navHover": "#333129",
+    "--navActive": "#4A473B",
+    "--accent": "#6E8B3D",
+    "--accentSoft": "#4F652B",
+    "--accentLight": "rgba(110, 139, 61, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};
+
+/* =====================================================
+   🔟 Harmonia Neutra (cinza bege claro)
+   ===================================================== */
+export const harmoniaNeutra = {
+  light: {
+    "--background": "#EDEBE7",
+    "--sidebar": "#E2DFDA",
+    "--sidebarBorder": "#D4D0CA",
+    "--textPrimary": "#2F2F2F",
+    "--textSecondary": "#757575",
+    "--navHover": "#DCD8D2",
+    "--navActive": "#CBC6BF",
+    "--accent": "#9E9E9E",
+    "--accentSoft": "#CFCFCF",
+    "--accentLight": "rgba(158, 158, 158, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  },
+  dark: {
+    "--background": "#1E1E1E",
+    "--sidebar": "#252525",
+    "--sidebarBorder": "#333333",
+    "--textPrimary": "#F5F5F5",
+    "--textSecondary": "#BDBDBD",
+    "--navHover": "#2E2E2E",
+    "--navActive": "#3D3D3D",
+    "--accent": "#B0B0B0",
+    "--accentSoft": "#7A7A7A",
+    "--accentLight": "rgba(176, 176, 176, 0.15)",
+    "--logout": "#C96A6A",
+    "--success": "#6b8c6b",
+    "--success-light": "rgba(107, 140, 107, 0.15)",
+    "--warning": "#e6b87e",
+    "--warning-light": "rgba(230, 184, 126, 0.15)",
+    "--danger": "#d1948c",
+    "--danger-light": "rgba(209, 148, 140, 0.15)",
+    "--info": "#89a9c4",
+    "--info-light": "rgba(137, 169, 196, 0.15)"
+  }
+};

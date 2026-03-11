@@ -1,0 +1,8 @@
+# Pastas que precisam existir mesmo vazias
+touch src/features/sales/components/.gitkeep
+touch src/features/sales/hooks/.gitkeep
+touch src/features/sales/services/.gitkeep
+touch src/features/sales/types/.gitkeep
+touch src/features/appointments/components/.gitkeep
+touch public/images/.gitkeep
+touch public/uploads/.gitkeep
