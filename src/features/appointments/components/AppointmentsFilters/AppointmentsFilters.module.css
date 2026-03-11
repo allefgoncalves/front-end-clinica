@@ -1,0 +1,249 @@
+/* src/features/appointments/components/AppointmentsFilters/AppointmentsFilters.module.css */
+.container {
+  margin-bottom: var(--spacing-md);
+  min-width: 1000px;
+}
+
+.searchBar {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.searchBox {
+  flex: 1;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-right: 40px;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.clearSearch {
+  position: absolute;
+  right: var(--spacing-xs);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--textSecondary);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.clearSearch:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.filterToggle {
+  padding: 0 var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.filterToggle:hover,
+.filterToggle.active {
+  background: var(--accentLight);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filtersPanel {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.filterGroup label {
+  font-weight: 600;
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select,
+.input,
+.dateInput {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+  transition: var(--transition-smooth);
+}
+
+.select:hover,
+.input:hover,
+.dateInput:hover {
+  border-color: var(--accentLight);
+}
+
+.select:focus,
+.input:focus,
+.dateInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.dateRange {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.dateRange span {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.filterActions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.clearButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.clearButton:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.filterTag {
+  background: var(--accentLight);
+  color: var(--accent);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .searchBar {
+    flex-direction: column;
+  }
+  
+  .filterToggle {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .filtersPanel {
+    grid-template-columns: 1fr;
+  }
+  
+  .filterActions {
+    justify-content: stretch;
+  }
+  
+  .clearButton {
+    width: 100%;
+  }
+  
+  .dateRange {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dateRange span {
+    text-align: center;
+  }
+}

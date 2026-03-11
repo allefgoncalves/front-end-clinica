@@ -27,7 +27,7 @@ export const useAppointments = () => {
   });
 
   const sortAppointmentsLocally = useCallback((appointmentsToSort: Appointment[]): Appointment[] => {
-    if (!appointmentsToSort.length) return appointmentsToSort;
+    if (!appointmentsToSort || !appointmentsToSort.length) return [];
     
     return [...appointmentsToSort].sort((a, b) => {
       let aValue: any = a[sortField];
@@ -57,6 +57,8 @@ export const useAppointments = () => {
   const loadAppointments = useCallback(async () => {
     try {
       setLoading(true);
+      console.log('Carregando agendamentos com filtros:', filters);
+      
       const data: PaginatedAppointments = await appointmentsService.getAll({ 
         page: pagination.page,
         limit: pagination.limit,
@@ -65,15 +67,30 @@ export const useAppointments = () => {
         sortOrder 
       });
       
-      setAppointments(data.items);
-      setPagination({
-        page: data.page,
-        totalPages: data.pages,
-        total: data.total,
-        limit: data.limit
-      });
+      console.log('Dados recebidos da API:', data);
+      
+      // CORREÇÃO: Verificar se data.items existe
+      if (data && data.items && Array.isArray(data.items)) {
+        setAppointments(data.items);
+        setPagination({
+          page: data.page || 1,
+          totalPages: data.pages || 1,
+          total: data.total || 0,
+          limit: data.limit || 20
+        });
+      } else {
+        console.error('Formato de dados inesperado:', data);
+        setAppointments([]);
+        setPagination({
+          page: 1,
+          totalPages: 1,
+          total: 0,
+          limit: 20
+        });
+      }
     } catch (error) {
       console.error('Erro ao carregar agendamentos:', error);
+      setAppointments([]);
     } finally {
       setLoading(false);
     }

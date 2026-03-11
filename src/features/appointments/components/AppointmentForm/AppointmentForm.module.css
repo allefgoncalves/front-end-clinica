@@ -1,0 +1,363 @@
+/* src/features/appointments/components/AppointmentForm/AppointmentForm.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-xl);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--sidebarBorder);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--sidebar);
+  z-index: 10;
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.modalHeader h2 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-xl);
+  margin: 0;
+  font-weight: 600;
+}
+
+.closeButton {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-full);
+  border: none;
+  background: var(--background);
+  color: var(--textSecondary);
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.closeButton:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+  transform: rotate(90deg);
+}
+
+.form {
+  padding: var(--spacing-xl);
+}
+
+.servicesSection {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--background);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+}
+
+.servicesSection h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 600;
+}
+
+.serviceSearch {
+  position: relative;
+  margin-bottom: var(--spacing-md);
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 20;
+}
+
+.dropdownItem {
+  padding: var(--spacing-md);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--sidebarBorder);
+  transition: var(--transition-smooth);
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background: var(--navHover);
+}
+
+.serviceName {
+  font-weight: 500;
+  color: var(--textPrimary);
+}
+
+.serviceDuration {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.servicePrice {
+  font-weight: 600;
+  color: var(--success);
+}
+
+.dropdownEmpty {
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--textSecondary);
+  font-style: italic;
+}
+
+.selectedServices {
+  margin-top: var(--spacing-md);
+}
+
+.emptyServices {
+  text-align: center;
+  color: var(--textSecondary);
+  padding: var(--spacing-lg);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  font-style: italic;
+}
+
+.serviceCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  margin-bottom: var(--spacing-sm);
+  transition: var(--transition-smooth);
+}
+
+.serviceCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.serviceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.serviceDetails {
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+}
+
+.removeButton {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-full);
+  border: none;
+  background: var(--danger-light);
+  color: var(--danger);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.removeButton:hover {
+  background: var(--danger);
+  color: white;
+  transform: scale(1.1);
+}
+
+.servicesSummary {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--accentLight);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+  color: var(--textSecondary);
+}
+
+.summaryRow strong {
+  color: var(--textPrimary);
+  font-weight: 600;
+}
+
+.formGroup {
+  margin-bottom: var(--spacing-lg);
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--textSecondary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  font-family: inherit;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--sidebarBorder);
+}
+
+.cancelButton,
+.saveButton {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  border: none;
+  font-size: var(--font-size-md);
+  min-width: 140px;
+}
+
+.cancelButton {
+  background: var(--background);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+}
+
+.cancelButton:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.saveButton {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.saveButton:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.saveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .modal {
+    width: 95%;
+    margin: var(--spacing-md);
+  }
+  
+  .formActions {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .saveButton {
+    width: 100%;
+  }
+}

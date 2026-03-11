@@ -34,8 +34,42 @@ export const appointmentsService = {
       if (params.filters.massagista_id) queryParams.append('massagista_id', params.filters.massagista_id);
     }
     
+    console.log('📡 Buscando agendamentos:', `/appointments?${queryParams.toString()}`);
     const response = await api.get(`/appointments?${queryParams.toString()}`);
-    return response.data;
+    
+    // CORREÇÃO: Garantir que a resposta tenha o formato esperado
+    const data = response.data;
+    
+    // Se a API retornar um array diretamente, converter para formato paginado
+    if (Array.isArray(data)) {
+      return {
+        items: data,
+        total: data.length,
+        page: 1,
+        pages: 1,
+        limit: data.length
+      };
+    }
+    
+    // Se já estiver no formato paginado, retornar
+    if (data && typeof data === 'object') {
+      return {
+        items: data.items || [],
+        total: data.total || 0,
+        page: data.page || 1,
+        pages: data.pages || 1,
+        limit: data.limit || 20
+      };
+    }
+    
+    // Fallback
+    return {
+      items: [],
+      total: 0,
+      page: 1,
+      pages: 1,
+      limit: 20
+    };
   },
 
   async getById(id: string): Promise<Appointment> {
