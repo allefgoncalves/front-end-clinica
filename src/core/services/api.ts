@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// PEGA A URL DO ARQUIVO .env
+const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8001/api';
+
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8001/api',
+  baseURL: API_URL, 
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -15,6 +18,7 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(`📤 ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
     return config;
   },
   (error) => Promise.reject(error)
@@ -22,7 +26,10 @@ api.interceptors.request.use(
 
 // Interceptor para refresh token
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(`📥 ${response.config.url}`, response.status);
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
     
@@ -32,8 +39,9 @@ api.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refresh_token');
         if (refreshToken) {
+          // IMPORTANTE: Usar a mesma baseURL
           const response = await axios.post(
-            'http://127.0.0.1:8001/api/auth/refresh',
+            `${API_URL}/auth/refresh`,  // ← USA A VARIÁVEL
             { refresh_token: refreshToken }
           );
           

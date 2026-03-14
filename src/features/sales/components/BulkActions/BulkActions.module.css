@@ -1,0 +1,262 @@
+    /* src/features/sales/components/BulkActions/BulkActions.module.css */
+.container {
+  margin-bottom: var(--spacing-md);
+  min-width: 1000px;
+}
+
+.bulkBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  border-radius: var(--border-radius-lg);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.selectedInfo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xs);
+}
+
+.selectedCount {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.selectedText {
+  font-size: var(--font-size-md);
+  opacity: 0.9;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.statusSelect,
+.paymentSelect {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: none;
+  background: white;
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.statusSelect:focus,
+.paymentSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accentLight);
+}
+
+.applyButton {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--border-radius-md);
+  border: none;
+  background: white;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.applyButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.applyButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.clearButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.clearButton:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.confirmModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmContent {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirmContent h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.confirmContent p {
+  color: var(--textSecondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.confirmDetails {
+  background: var(--background);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.detailRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.detailRow:last-child {
+  margin-bottom: 0;
+}
+
+.detailLabel {
+  font-size: var(--font-size-xs);
+  color: var(--textSecondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailValue {
+  font-weight: 600;
+  color: var(--textPrimary);
+  font-size: var(--font-size-lg);
+}
+
+.notesInput {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+}
+
+.notesInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accentLight);
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+}
+
+.cancelButton,
+.confirmButton {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  border: none;
+  font-size: var(--font-size-md);
+  min-width: 120px;
+}
+
+.cancelButton {
+  background: var(--background);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.confirmButton {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.confirmButton:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.confirmButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .bulkBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+  
+  .statusSelect,
+  .paymentSelect,
+  .applyButton,
+  .clearButton {
+    width: 100%;
+  }
+}

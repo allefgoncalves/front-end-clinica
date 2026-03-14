@@ -1,6 +1,6 @@
 // src/features/products/hooks/useProducts.ts
-import { useState, useEffect, useCallback } from 'react';
-import { Product, ProductFilters, SortField, SortOrder, PaginatedProducts, ProductCreate } from '../types/product.types';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Product, ProductFilters, SortField, SortOrder, PaginatedProducts, ProductCreate, ProductUpdate } from '../types/product.types';
 import { productsService } from '../services/productsService';
 
 export const useProducts = () => {
@@ -18,10 +18,41 @@ export const useProducts = () => {
     limit: 20
   });
 
+  const sortProductsLocally = useCallback((productsToSort: Product[]): Product[] => {
+    // CORREÇÃO: Verificar se productsToSort existe e tem length
+    if (!productsToSort || !Array.isArray(productsToSort) || productsToSort.length === 0) {
+      return [];
+    }
+    
+    return [...productsToSort].sort((a, b) => {
+      let aValue: any = a[sortField];
+      let bValue: any = b[sortField];
+      
+      if (aValue === null || aValue === undefined) aValue = '';
+      if (bValue === null || bValue === undefined) bValue = '';
+      
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return sortOrder === 'asc' 
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
+      
+      if (sortOrder === 'asc') {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    });
+  }, [sortField, sortOrder]);
+
+  const sortedProducts = useMemo(() => {
+    return sortProductsLocally(products);
+  }, [products, sortProductsLocally]);
+
   const loadProducts = useCallback(async () => {
     try {
       setLoading(true);
-      console.log('Carregando produtos com:', { 
+      console.log('Carregando produtos com filtros:', { 
         page: pagination.page,
         limit: pagination.limit,
         filters, 
@@ -29,7 +60,7 @@ export const useProducts = () => {
         sortOrder 
       });
       
-      const data: PaginatedProducts = await productsService.getAll({ 
+      const data = await productsService.getAll({ 
         page: pagination.page,
         limit: pagination.limit,
         filters, 
@@ -37,24 +68,35 @@ export const useProducts = () => {
         sortOrder 
       });
       
-      console.log('Produtos carregados:', data.items.length);
-      console.log('Ordenação aplicada:', sortField, sortOrder);
+      console.log('Dados recebidos:', data);
       
-      setProducts(data.items);
-      setPagination({
-        page: data.page,
-        totalPages: data.pages,
-        total: data.total,
-        limit: data.limit
-      });
+      // CORREÇÃO: Verificar se data.items existe
+      if (data && data.items && Array.isArray(data.items)) {
+        setProducts(data.items);
+        setPagination({
+          page: data.page || 1,
+          totalPages: data.pages || 1,
+          total: data.total || 0,
+          limit: data.limit || 20
+        });
+      } else {
+        console.error('Formato de dados inválido:', data);
+        setProducts([]);
+        setPagination({
+          page: 1,
+          totalPages: 1,
+          total: 0,
+          limit: 20
+        });
+      }
     } catch (error) {
       console.error('Erro ao carregar produtos:', error);
+      setProducts([]);
     } finally {
       setLoading(false);
     }
   }, [filters, sortField, sortOrder, pagination.page, pagination.limit]);
 
-  // Recarregar quando os parâmetros de ordenação mudarem
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       loadProducts();
@@ -63,25 +105,16 @@ export const useProducts = () => {
     return () => clearTimeout(debounceTimer);
   }, [filters, sortField, sortOrder, pagination.page, loadProducts]);
 
-  // Função de ordenação CORRIGIDA
   const handleSort = (field: SortField) => {
-    console.log('Ordenando por:', field, 'Atual:', sortField, sortOrder);
-    
-    // Determinar nova ordem
     let newOrder: SortOrder = 'asc';
     if (sortField === field) {
-      // Mesmo campo: alternar ordem
       newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     } else {
-      // Campo diferente: começar com asc
       newOrder = 'asc';
     }
     
-    // Atualizar estado
     setSortField(field);
     setSortOrder(newOrder);
-    
-    // Resetar para primeira página ao ordenar
     setPagination(prev => ({ ...prev, page: 1 }));
   };
 
@@ -143,7 +176,7 @@ export const useProducts = () => {
   };
 
   return {
-    products,
+    products: sortedProducts,
     loading,
     filters,
     setFilters,

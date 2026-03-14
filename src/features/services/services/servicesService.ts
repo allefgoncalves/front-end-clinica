@@ -18,7 +18,6 @@ export const servicesService = {
     sortField?: SortField;
     sortOrder?: SortOrder;
   }): Promise<PaginatedServices> {
-    // Construir query params
     const queryParams = new URLSearchParams();
     
     if (params?.page) queryParams.append('page', params.page.toString());
@@ -26,7 +25,6 @@ export const servicesService = {
     if (params?.sortField) queryParams.append('sort_by', params.sortField);
     if (params?.sortOrder) queryParams.append('sort_order', params.sortOrder);
     
-    // Adicionar filtros
     if (params?.filters) {
       if (params.filters.search) queryParams.append('search', params.filters.search);
       if (params.filters.active !== undefined) queryParams.append('active', params.filters.active.toString());
@@ -37,10 +35,43 @@ export const servicesService = {
       if (params.filters.maxDuration) queryParams.append('max_duration', params.filters.maxDuration.toString());
     }
     
-    console.log('API Request Services:', `/services?${queryParams.toString()}`);
+    console.log('📡 API Request Services:', `/services?${queryParams.toString()}`);
     
     const response = await api.get(`/services?${queryParams.toString()}`);
-    return response.data;
+    
+    // CORREÇÃO: Garantir que a resposta tenha o formato esperado
+    const data = response.data;
+    
+    // Se a API retornar um array diretamente, converter para formato paginado
+    if (Array.isArray(data)) {
+      return {
+        items: data,
+        total: data.length,
+        page: 1,
+        pages: 1,
+        limit: data.length
+      };
+    }
+    
+    // Se já estiver no formato paginado, retornar
+    if (data && typeof data === 'object') {
+      return {
+        items: data.items || [],
+        total: data.total || 0,
+        page: data.page || 1,
+        pages: data.pages || 1,
+        limit: data.limit || 20
+      };
+    }
+    
+    // Fallback
+    return {
+      items: [],
+      total: 0,
+      page: 1,
+      pages: 1,
+      limit: 20
+    };
   },
 
   async getById(id: string): Promise<Service> {
@@ -68,7 +99,6 @@ export const servicesService = {
   }
 };
 
-// Exportações nomeadas
 export const getServices = servicesService.getAll;
 export const getService = servicesService.getById;
 export const createService = servicesService.create;

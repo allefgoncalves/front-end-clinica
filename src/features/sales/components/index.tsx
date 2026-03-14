@@ -1,0 +1,164 @@
+// src/features/sales/components/ProductRanking/index.ts
+export { ProductRanking } from './ProductRanking';/* src/features/sales/components/ProductRanking/ProductRanking.module.css */
+.ranking {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--sidebarBorder);
+  min-width: 1000px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.header h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.period {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  background: var(--background);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-full);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.card {
+  background: var(--background);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  overflow: hidden;
+}
+
+.cardHeader {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--navActive);
+  border-bottom: 1px solid var(--sidebarBorder);
+}
+
+.cardTitle {
+  color: var(--textPrimary);
+  font-weight: 600;
+  font-size: var(--font-size-md);
+}
+
+.list {
+  padding: var(--spacing-md);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--sidebarBorder);
+  transition: var(--transition-smooth);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item:hover {
+  background: var(--navHover);
+  border-radius: var(--border-radius-md);
+}
+
+.rank {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accentSoft) 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: var(--border-radius-full);
+  flex-shrink: 0;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemName {
+  font-weight: 600;
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+}
+
+.itemStats {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.itemQuantity {
+  color: var(--textSecondary);
+  font-size: var(--font-size-xs);
+  background: var(--info-light);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-full);
+}
+
+.itemRevenue {
+  font-weight: 600;
+  color: var(--success);
+  font-size: var(--font-size-sm);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--textSecondary);
+  font-style: italic;
+}
+
+/* Scrollbar personalizada */
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: var(--accentSoft);
+  border-radius: var(--border-radius-full);
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,163 @@
+/* src/features/sales/components/SalesDashboard/SalesDashboard.module.css */
+.dashboard {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  border: 1px solid var(--sidebarBorder);
+  min-width: 1000px;
+}
+
+.dateRange {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  justify-content: flex-end;
+}
+
+.dateInput {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.dateInput label {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.dateInput input {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--sidebarBorder);
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.cardIcon {
+  font-size: 2rem;
+  background: var(--accentLight);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-full);
+}
+
+.cardInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardLabel {
+  color: var(--textSecondary);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cardValue {
+  color: var(--textPrimary);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.statusSection {
+  margin-top: var(--spacing-xl);
+}
+
+.statusSection h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.statusItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--sidebarBorder);
+}
+
+.statusLabel {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.statusValue {
+  color: var(--textPrimary);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.loading, .empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  color: var(--textSecondary);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--accentLight);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .dateRange {
+    flex-direction: column;
+  }
+  
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statusGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,357 @@
+/* src/features/sales/components/SalesTable/SalesTable.module.css */
+.tableWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--sidebarBorder);
+  min-width: 1000px;
+  height: auto; /* Altura automática */
+  max-height: none; /* Sem altura máxima fixa */
+}
+
+.tableContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--sidebar);
+  position: relative;
+}
+
+.tableHeader {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--navActive);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.tableBody {
+  flex: 1;
+  overflow-y: auto; /* Scroll vertical quando necessário */
+  overflow-x: auto;
+  max-height: none;
+  height: auto;
+  min-height: 300px; /* Altura mínima para visualização */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accentSoft) transparent;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--sidebar);
+  table-layout: fixed;
+}
+
+.th {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--textPrimary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+  white-space: nowrap;
+  background: var(--navActive);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* CORREÇÃO 3: Checkbox com 40px */
+.thCheckbox {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  background: var(--navActive);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* CORREÇÃO 3: Setinha com 40px */
+.thExpand {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  background: var(--navActive);
+  border-bottom: 2px solid var(--accent);
+}
+
+.th.sortable {
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.th.sortable:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  justify-content: space-between;
+}
+
+.sortIcon {
+  color: var(--textSecondary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+  min-width: 20px;
+  text-align: right;
+}
+
+.th.sortable:hover .sortIcon {
+  color: white;
+}
+
+.td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--textPrimary);
+  border-bottom: 1px solid var(--sidebarBorder);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--sidebar);
+}
+
+/* CORREÇÃO 3: Checkbox com 40px */
+.tdCheckbox {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  background: var(--sidebar);
+}
+
+/* CORREÇÃO 3: Setinha com 40px */
+.tdExpand {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  background: var(--sidebar);
+}
+
+/* Larguras das colunas */
+.th:nth-child(3), .td:nth-child(3) { width: 12%; } /* Data/Hora */
+.th:nth-child(4), .td:nth-child(4) { width: 15%; } /* Cliente */
+.th:nth-child(5), .td:nth-child(5) { width: 8%; }  /* Itens */
+.th:nth-child(6), .td:nth-child(6) { width: 10%; } /* Total */
+
+/* CORREÇÃO 3: Status e Pagamento com tamanho mínimo */
+.th:nth-child(7), .td:nth-child(7) { width: 10%; min-width: 100px; } /* Status */
+.th:nth-child(8), .td:nth-child(8) { width: 12%; min-width: 140px; } /* Pagamento - CORRIGIDO */
+.th:nth-child(9), .td:nth-child(9) { width: 15%; min-width: 180px; } /* Ações */
+
+.tableRow {
+  transition: var(--transition-smooth);
+}
+
+.tableRow:hover {
+  background: var(--navHover);
+}
+
+.tableRow.selected {
+  background: var(--accentLight);
+}
+
+.tableRow:hover .td,
+.tableRow:hover .tdCheckbox,
+.tableRow:hover .tdExpand {
+  background: var(--navHover);
+}
+
+.tableRow.selected .td,
+.tableRow.selected .tdCheckbox,
+.tableRow.selected .tdExpand {
+  background: var(--accentLight);
+}
+
+.expandButton {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--textSecondary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.expandButton:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.clientEmail {
+  font-size: var(--font-size-xs);
+  color: var(--textSecondary);
+}
+
+.itemsCount {
+  background: var(--info-light);
+  color: var(--info);
+  padding: 4px 8px;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: inline-block;
+}
+
+.total {
+  font-weight: 700;
+  color: var(--success);
+}
+
+.status,
+.paymentStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  width: 100%;
+  max-width: 120px;
+  justify-content: center;
+}
+
+.status.pending { background: var(--warning-light); color: var(--warning); }
+.status.paid { background: var(--success-light); color: var(--success); }
+.status.separated { background: var(--info-light); color: var(--info); }
+.status.delivered { background: var(--success-light); color: var(--success); }
+.status.cancelled { background: var(--danger-light); color: var(--danger); }
+
+.paymentStatus.pending { background: var(--warning-light); color: var(--warning); }
+.paymentStatus.paid { background: var(--success-light); color: var(--success); }
+.paymentStatus.refunded { background: var(--danger-light); color: var(--danger); }
+
+.actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.receiptButton,
+.payButton,
+.separateButton,
+.deliverButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-md);
+  flex-shrink: 0;
+}
+
+.receiptButton {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.receiptButton:hover:not(:disabled) {
+  background: var(--info);
+  color: white;
+  transform: scale(1.1);
+}
+
+.payButton {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.payButton:hover {
+  background: var(--success);
+  color: white;
+  transform: scale(1.1);
+}
+
+.separateButton {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.separateButton:hover {
+  background: var(--warning);
+  color: white;
+  transform: scale(1.1);
+}
+
+.deliverButton {
+  background: var(--accentLight);
+  color: var(--accent);
+}
+
+.deliverButton:hover {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.1);
+}
+
+.receiptButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.expandedRow {
+  background: var(--background);
+}
+
+.expandedContent {
+  padding: 0 !important;
+  border-bottom: 1px solid var(--sidebarBorder);
+}
+
+.emptyState {
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--textSecondary);
+  font-style: italic;
+}
+
+@media (max-width: 1200px) {
+  .tableWrapper {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tableWrapper {
+    min-width: 800px;
+  }
+}

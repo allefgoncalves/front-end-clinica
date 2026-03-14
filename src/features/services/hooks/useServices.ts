@@ -1,6 +1,13 @@
 // src/features/services/hooks/useServices.ts
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Service, ServiceFilters, SortField, SortOrder, PaginatedServices, ServiceCreate } from '../types/service.types';
+import { 
+  Service, 
+  ServiceFilters, 
+  SortField, 
+  SortOrder, 
+  PaginatedServices, 
+  ServiceCreate 
+} from '../types/service.types';
 import { servicesService } from '../services/servicesService';
 
 export const useServices = () => {
@@ -20,7 +27,10 @@ export const useServices = () => {
 
   // Função de ordenação local (fallback)
   const sortServicesLocally = useCallback((servicesToSort: Service[]): Service[] => {
-    if (!servicesToSort.length) return servicesToSort;
+    // CORREÇÃO: Verificar se servicesToSort existe e tem length
+    if (!servicesToSort || !Array.isArray(servicesToSort) || servicesToSort.length === 0) {
+      return [];
+    }
     
     return [...servicesToSort].sort((a, b) => {
       let aValue: any = a[sortField === 'duration' ? 'duration_minutes' : sortField];
@@ -51,7 +61,7 @@ export const useServices = () => {
   const loadServices = useCallback(async () => {
     try {
       setLoading(true);
-      console.log('Carregando serviços com:', { 
+      console.log('Carregando serviços com filtros:', { 
         page: pagination.page,
         limit: pagination.limit,
         filters, 
@@ -67,15 +77,22 @@ export const useServices = () => {
         sortOrder 
       });
       
-      setServices(data.items);
-      setPagination({
-        page: data.page,
-        totalPages: data.pages,
-        total: data.total,
-        limit: data.limit
-      });
+      // CORREÇÃO: Garantir que data.items existe
+      if (data && data.items) {
+        setServices(data.items);
+        setPagination({
+          page: data.page || 1,
+          totalPages: data.pages || 1,
+          total: data.total || 0,
+          limit: data.limit || 20
+        });
+      } else {
+        console.error('Formato de dados inválido:', data);
+        setServices([]);
+      }
     } catch (error) {
       console.error('Erro ao carregar serviços:', error);
+      setServices([]);
     } finally {
       setLoading(false);
     }
@@ -128,6 +145,11 @@ export const useServices = () => {
     setShowForm(true);
   };
 
+  const handleNewService = () => {
+    setSelectedService(null);
+    setShowForm(true);
+  };
+
   const handleFormSave = async (data: ServiceCreate) => {
     try {
       if (selectedService) {
@@ -170,6 +192,7 @@ export const useServices = () => {
     toggleStatus,
     handleDelete,
     handleEdit,
+    handleNewService,
     handleFormSave,
     handleInlineSave,
     selectedService,

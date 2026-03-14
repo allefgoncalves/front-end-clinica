@@ -1,0 +1,290 @@
+/* src/features/sales/components/SalesFilters/SalesFilters.module.css */
+.container {
+  margin-bottom: var(--spacing-md);
+  min-width: 1000px;
+}
+
+.topBar {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.searchBox {
+  flex: 1;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  padding-right: 40px;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  transition: var(--transition-smooth);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.clearSearch {
+  position: absolute;
+  right: var(--spacing-xs);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--textSecondary);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.clearSearch:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.exportButton {
+  padding: 0 var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--success);
+  background: transparent;
+  color: var(--success);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+}
+
+.exportButton:hover {
+  background: var(--success);
+  color: white;
+}
+
+.filterToggle {
+  padding: 0 var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--sidebar);
+  color: var(--textPrimary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+}
+
+.filterToggle:hover,
+.filterToggle.active {
+  background: var(--accentLight);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.selectedBar {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--info-light);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--info);
+  font-weight: 500;
+}
+
+.filtersPanel {
+  background: var(--sidebar);
+  border: 1px solid var(--sidebarBorder);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.filterGroup label {
+  font-weight: 600;
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  color: var(--textPrimary);
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-xs) 0;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.checkboxText {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dateRange {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.dateInput {
+  flex: 1;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--sidebarBorder);
+  background: var(--background);
+  color: var(--textPrimary);
+}
+
+.dateRange span {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.filterActions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.clearButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--danger);
+  background: transparent;
+  color: var(--danger);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+}
+
+.clearButton:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--textSecondary);
+  border: 1px solid var(--sidebarBorder);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.filterTag {
+  background: var(--accentLight);
+  color: var(--accent);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+  }
+  
+  .actions {
+    width: 100%;
+  }
+  
+  .exportButton,
+  .filterToggle {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .dateRange {
+    flex-direction: column;
+  }
+  
+  .filterActions {
+    justify-content: stretch;
+  }
+  
+  .clearButton {
+    width: 100%;
+  }
+}
