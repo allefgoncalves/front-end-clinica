@@ -1,0 +1,2 @@
+﻿export { GoalHistory } from './GoalHistory';
+

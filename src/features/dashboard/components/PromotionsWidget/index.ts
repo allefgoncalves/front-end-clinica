@@ -1,0 +1,2 @@
+﻿export { PromotionsWidget } from './PromotionsWidget';
+

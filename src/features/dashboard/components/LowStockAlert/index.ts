@@ -1,0 +1,2 @@
+﻿export { LowStockAlert } from './LowStockAlert';
+
