@@ -1,0 +1,76 @@
+/* src/features/dashboard/components/PromotionsWidget/PromotionsWidget.module.css */
+.widget {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--sidebarBorder);
+  margin-bottom: var(--spacing-xl);
+}
+
+.widget h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--background);
+  border-radius: var(--border-radius-md);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  border-left: 3px solid transparent;
+}
+
+.item:hover {
+  transform: translateX(2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.item.success {
+  border-left-color: var(--success);
+}
+
+.item.warning {
+  border-left-color: var(--warning);
+}
+
+.item.danger {
+  border-left-color: var(--danger);
+}
+
+.icon {
+  font-size: var(--font-size-lg);
+  width: 24px;
+  text-align: center;
+}
+
+.title {
+  flex: 1;
+  color: var(--textPrimary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  background: var(--accentLight);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}

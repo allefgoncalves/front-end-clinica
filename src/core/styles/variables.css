@@ -1,6 +1,6 @@
 /* src/core/styles/variables.css */
 :root {
-  /* Cores base */
+  /* Cores base - ORIGINAIS PADRÃO */
   --background: #f8f5f0;  
   --sidebar: #f0eae2;      
   --sidebarBorder: #e0d6cc;
@@ -14,7 +14,6 @@
   --accentSoft: #9fb89f;   
   --accentLight: rgba(125, 157, 125, 0.1);
   
-
   --success: #6b8c6b;    
   --success-light: rgba(107, 140, 107, 0.1);
   --warning: #e6b87e;     
@@ -77,8 +76,13 @@
   --accent: #8bab8b;
   --accentSoft: #6b8a6b;
   --accentLight: rgba(139, 171, 139, 0.15); 
+  --success: #6b8c6b;
   --success-light: rgba(107, 140, 107, 0.15);
+  --warning: #e6b87e;
   --warning-light: rgba(230, 184, 126, 0.15);
+  --danger: #d1948c;
   --danger-light: rgba(209, 148, 140, 0.15);
+  --info: #89a9c4;
   --info-light: rgba(137, 169, 196, 0.15);
+  --logout: #d1948c;
 }

@@ -1,4 +1,7 @@
 // src/core/styles/themes.ts
+// ⚠️ CORES AGORA SÃO DEFINIDAS APENAS EM variables.css
+// Este arquivo é mantido para compatibilidade futura mas NÃO é usado atualmente
+
 export type ThemeMode = 'light' | 'dark';
 
 export const lightTheme = {
@@ -22,16 +25,16 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
-    background: "#F1F4E8",
-    sidebar: "#E2E8CF",
-    sidebarBorder: "#D3DDB6",
-    textPrimary: "#3A4032",
-    textSecondary: "#6F775A",
-    navHover: "#DCE4C0",
-    navActive: "#C9D7A3",
-    accent: "#8DAA5A",
-    accentSoft: "#B8C98D",
-    logout: "#C96A6A", 
+    background: "#1a1e24",
+    sidebar: "#24292f",
+    sidebarBorder: "#2d333a",
+    textPrimary: "#e6edf3",
+    textSecondary: "#a0a8b3",
+    navHover: "#2d333a",
+    navActive: "#373e47",
+    accent: "#8bab8b",
+    accentSoft: "#6b8a6b",
+    logout: "#d1948c", 
     success: '#6b8c6b',
     warning: '#e6b87e',
     danger: '#d1948c',

@@ -1,0 +1,108 @@
+/* src/features/dashboard/components/StatusPieChart/StatusPieChart.module.css */
+.chart {
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--sidebar-border);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart h3 {
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 280px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.centerText {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.centerTotal {
+  font-size: 4rem;
+  font-weight: 700;
+  fill: var(--textPrimary);
+}
+
+.centerLabel {
+  font-size: 0.75rem;
+  fill: var(--textSecondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.legendColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--sidebarBorder);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  background: var(--background);
+  border-radius: var(--border-radius-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.legendColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legendName {
+  flex: 1;
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+  text-align: left;
+}
+
+.legendValue {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  min-width: 40px;
+  text-align: right;
+}
+
+@media (max-width: 480px) {
+  .legendItem {
+    padding: 4px 6px;
+  }
+  
+  .legendName {
+    font-size: var(--font-size-xs);
+  }
+  
+  .legendValue {
+    font-size: var(--font-size-xs);
+    min-width: 35px;
+  }
+  
+  .centerTotal {
+    font-size: 2.5rem;
+  }
+}

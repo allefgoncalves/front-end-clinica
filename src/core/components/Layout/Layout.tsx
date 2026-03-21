@@ -1,3 +1,4 @@
+// src/core/components/Layout/Layout.tsx
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
@@ -28,13 +29,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { path: '/carts', label: 'Carrinhos' },
     { path: '/promotions', label: 'Promoções' },
     { path: '/sales', label: 'Vendas' },
+    { path: '/goals', label: 'Metas' },  // NOVO ITEM
   ];
 
   return (
     <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <div className={styles.logoWrapper}>
+      <header className={styles.header}>
+        <div className={styles.headerLeft}>
+          <div className={styles.logo}>
             <img 
               src={logo} 
               alt="Prover Logo" 
@@ -45,7 +47,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
             <span className={styles.logoText}>Prover</span>
           </div>
-          
+
+          <nav className={styles.nav}>
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`${styles.navLink} ${
+                  location.pathname === item.path ? styles.active : ''
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div className={styles.headerRight}>
           <button 
             onClick={toggleTheme} 
             className={styles.themeToggle}
@@ -53,38 +71,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
-        </div>
 
-        <nav className={styles.nav}>
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`${styles.navLink} ${
-                location.pathname === item.path ? styles.active : ''
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className={styles.footer}>
           <div className={styles.userInfo}>
-            <div className={styles.userAvatar}>
+            <div className={styles.userAvatar} title={user?.name || 'Administrador'}>
               {user?.name?.charAt(0) || 'A'}
             </div>
-            <div className={styles.userDetails}>
-              <div className={styles.userName}>{user?.name || 'Administrador'}</div>
-              <div className={styles.userEmail}>{user?.email || 'admin@prover.com'}</div>
-            </div>
+            <span className={styles.userName}>{user?.name?.split(' ')[0] || 'Admin'}</span>
           </div>
-          
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            Sair
+
+          <button 
+            onClick={handleLogout} 
+            className={styles.logoutButton}
+            title="Sair"
+          >
+            ✕
           </button>
         </div>
-      </aside>
+      </header>
 
       <main className={styles.main}>{children}</main>
     </div>

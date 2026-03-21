@@ -1,0 +1,84 @@
+/* src/features/dashboard/components/UpcomingAppointments/UpcomingAppointments.module.css */
+.card {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--sidebarBorder);
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.header h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0;
+}
+
+.viewAll {
+  color: var(--accent);
+  font-size: var(--font-size-xs);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.viewAll:hover {
+  text-decoration: underline;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--background);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.time {
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 60px;
+}
+
+.client {
+  flex: 1;
+  color: var(--textPrimary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service {
+  color: var(--textSecondary);
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status {
+  min-width: 24px;
+  text-align: center;
+}
+
+.status.confirmed {
+  color: var(--success);
+}
+
+.status.pending {
+  color: var(--warning);
+}

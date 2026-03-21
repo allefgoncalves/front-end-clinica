@@ -1,0 +1,120 @@
+/* src/features/goals/components/GoalProgress/GoalProgress.module.css */
+.card {
+  background: var(--sidebar);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--sidebarBorder);
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.header h3 {
+  color: var(--textPrimary);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  margin: 0;
+}
+
+.editButton {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-full);
+  border: none;
+  background: var(--background);
+  color: var(--textSecondary);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+}
+
+.editButton:hover {
+  background: var(--info-light);
+  color: var(--info);
+  transform: scale(1.1);
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--spacing-md);
+}
+
+.current {
+  color: var(--textPrimary);
+  font-weight: 700;
+  font-size: var(--font-size-xl);
+}
+
+.target {
+  color: var(--textSecondary);
+  font-size: var(--font-size-sm);
+}
+
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: var(--background);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--border-radius-full);
+  transition: width 0.3s ease;
+}
+
+.percentage {
+  color: var(--textPrimary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  min-width: 45px;
+  text-align: right;
+}
+
+.expected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  color: var(--textSecondary);
+  font-size: var(--font-size-xs);
+}
+
+.ahead {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.behind {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.days {
+  color: var(--textSecondary);
+  font-size: var(--font-size-xs);
+  text-align: right;
+}
