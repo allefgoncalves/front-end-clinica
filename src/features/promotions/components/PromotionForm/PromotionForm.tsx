@@ -1,5 +1,5 @@
 // src/features/promotions/components/PromotionForm/PromotionForm.tsx
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Promotion, PromotionCreate, PromotionItem, AvailableItem } from '../../types/promotion.types';
 import styles from './PromotionForm.module.css';
 
@@ -32,7 +32,7 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
   const [formData, setFormData] = useState<PromotionCreate>({
     title: '',
     description: '',
-    discount_percentage: null,  // Começa como null
+    discount_percentage: null,
     items: [],
     combo_price: null,
     image_base64: null,
@@ -50,7 +50,6 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
   const [editingItemIndex, setEditingItemIndex] = useState<number | null>(null);
   const [editingQuantity, setEditingQuantity] = useState<number>(1);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [lastEdited, setLastEdited] = useState<'discount' | 'combo' | null>(null);
 
   useEffect(() => {
     if (promotion) {
@@ -65,7 +64,12 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
         valid_from: promotion.valid_from,
         valid_until: promotion.valid_until,
       });
-      setItems(promotion.items);
+      // CORREÇÃO: Garantir que os itens tenham a quantidade correta
+      const itemsWithQuantity = promotion.items.map(item => ({
+        ...item,
+        quantity: item.quantity || 1
+      }));
+      setItems(itemsWithQuantity);
     }
   }, [promotion]);
 
@@ -83,76 +87,22 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    console.log('Dados do formulário antes de salvar:', { ...formData, items });
     try {
-      await onSave({ ...formData, items });
+      const itemsToSave = items.map(item => ({
+        ...item,
+        quantity: item.quantity || 1
+      }));
+      
+      await onSave({ ...formData, items: itemsToSave });
       onClose();
     } catch (error) {
       console.error('Erro ao salvar:', error);
     } finally {
       setLoading(false);
     }
+    console.log('Dados do formulário após salvar:', { ...formData, items });
   };
-
-  // CORREÇÃO: Cálculo automático entre desconto e preço do combo
-  const calculateTotalOriginal = useCallback(() => {
-    return items.reduce((sum, item) => sum + (item.original_price * (item.quantity || 1)), 0);
-  }, [items]);
-
-  const handleDiscountChange = (value: string) => {
-    const discount = value === '' ? null : Number(value);
-    
-    // Usando função updater para evitar problemas de tipo
-    setFormData(prev => ({ ...prev, discount_percentage: discount }));
-    setLastEdited('discount');
-    
-    // Se tem desconto, calcular combo_price
-    if (discount && discount > 0) {
-      const originalTotal = calculateTotalOriginal();
-      const comboPrice = originalTotal * (1 - discount / 100);
-      setFormData(prev => ({ ...prev, combo_price: Math.round(comboPrice * 100) / 100 }));
-    } else if (discount === null || discount === 0) {
-      setFormData(prev => ({ ...prev, combo_price: null }));
-    }
-  };
-
-  const handleComboPriceChange = (value: string) => {
-    const comboPrice = value === '' ? null : Number(value);
-    
-    setFormData(prev => ({ ...prev, combo_price: comboPrice }));
-    setLastEdited('combo');
-    
-    // Se tem combo_price, calcular desconto
-    if (comboPrice && comboPrice > 0) {
-      const originalTotal = calculateTotalOriginal();
-      if (originalTotal > 0) {
-        const discount = ((originalTotal - comboPrice) / originalTotal) * 100;
-        setFormData(prev => ({ 
-          ...prev, 
-          discount_percentage: Math.max(0, Math.min(100, Math.round(discount * 10) / 10))
-        }));
-      }
-    } else {
-      setFormData(prev => ({ ...prev, discount_percentage: null }));
-    }
-  };
-
-  // Recalcular quando itens mudarem, se necessário
-  useEffect(() => {
-    if (lastEdited === 'discount' && formData.discount_percentage) {
-      const originalTotal = calculateTotalOriginal();
-      const comboPrice = originalTotal * (1 - (formData.discount_percentage || 0) / 100);
-      setFormData(prev => ({ ...prev, combo_price: Math.round(comboPrice * 100) / 100 }));
-    } else if (lastEdited === 'combo' && formData.combo_price) {
-      const originalTotal = calculateTotalOriginal();
-      if (originalTotal > 0) {
-        const discount = ((originalTotal - (formData.combo_price || 0)) / originalTotal) * 100;
-        setFormData(prev => ({ 
-          ...prev, 
-          discount_percentage: Math.max(0, Math.min(100, Math.round(discount * 10) / 10))
-        }));
-      }
-    }
-  }, [items, lastEdited, formData.discount_percentage, formData.combo_price, calculateTotalOriginal]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -161,23 +111,16 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked }));
     } else if (type === 'number') {
-      // Tratamento especial para campos de desconto e combo
-      if (name === 'discount_percentage') {
-        handleDiscountChange(value);
-      } else if (name === 'combo_price') {
-        handleComboPriceChange(value);
-      } else {
-        setFormData(prev => ({ 
-          ...prev, 
-          [name]: value === '' ? null : Number(value) 
-        }));
-      }
+      setFormData(prev => ({ 
+        ...prev, 
+        [name]: value === '' ? null : Number(value) 
+      }));
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
-  // Filtrar itens baseado no termo de busca (sem acentos)
+  // Filtrar itens baseado no termo de busca
   const filteredItems = useMemo(() => {
     const items = selectedItemType === 'service' ? availableServices : availableProducts;
     
@@ -218,12 +161,13 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
       return;
     }
 
+    // CORREÇÃO: Criar item com a quantidade selecionada
     const newItem: PromotionItem = {
       item_id: selectedItem.id,
       item_type: selectedItem.type,
       name: selectedItem.name,
       original_price: selectedItem.price,
-      quantity: itemQuantity,
+      quantity: itemQuantity,  // Quantidade selecionada
       image_base64: selectedItem.image_base64
     };
 
@@ -235,12 +179,14 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
     setItemQuantity(1);
   };
 
-  // Editar quantidade de item
+  // CORREÇÃO: Editar quantidade de item
   const handleEditQuantity = (index: number, currentQuantity: number) => {
+    console.log(`Editando quantidade do item no índice ${index}`,`quantiade de item atual: ${currentQuantity}`);
     setEditingItemIndex(index);
     setEditingQuantity(currentQuantity);
   };
 
+  // CORREÇÃO: Salvar quantidade editada
   const handleSaveQuantity = (index: number) => {
     if (editingQuantity < 1) return;
     
@@ -261,19 +207,21 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   };
 
+  const calculateTotalOriginal = () => {
+    // CORREÇÃO: Usar a quantidade armazenada no item
+    return items.reduce((sum, item) => sum + (item.original_price * (item.quantity || 1)), 0);
+  };
+
   const calculateDiscountedTotal = () => {
     const originalTotal = calculateTotalOriginal();
     
-    // Se combo_price foi definido, usar ele
     if (formData.combo_price !== null && formData.combo_price !== undefined && formData.combo_price > 0) {
       return formData.combo_price;
     }
     
-    // Caso contrário, calcular baseado no percentual
     return originalTotal * (1 - (formData.discount_percentage || 0) / 100);
   };
 
-  // Calcular desconto implícito quando combo_price é definido
   const calculateImpliedDiscount = () => {
     const originalTotal = calculateTotalOriginal();
     if (formData.combo_price && originalTotal > 0) {
@@ -318,6 +266,78 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
               placeholder="Descreva a promoção"
               className={styles.textarea}
             />
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="discount_percentage">Desconto (%)</label>
+              <input
+                type="number"
+                id="discount_percentage"
+                name="discount_percentage"
+                value={formData.discount_percentage === null ? '' : formData.discount_percentage}
+                onChange={handleChange}
+                min="0"
+                max="100"
+                step="0.1"
+                placeholder="0"
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="combo_price">Preço do Combo (opcional)</label>
+              <input
+                type="number"
+                id="combo_price"
+                name="combo_price"
+                value={formData.combo_price === null ? '' : formData.combo_price}
+                onChange={handleChange}
+                step="0.01"
+                min="0"
+                placeholder="R$ 0,00"
+                className={styles.input}
+              />
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="valid_from">Válido de</label>
+              <input
+                type="date"
+                id="valid_from"
+                name="valid_from"
+                value={formData.valid_from || ''}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="valid_until">Válido até</label>
+              <input
+                type="date"
+                id="valid_until"
+                name="valid_until"
+                value={formData.valid_until || ''}
+                onChange={handleChange}
+                min={formData.valid_from || undefined}
+                className={styles.input}
+              />
+            </div>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.checkbox}>
+              <input
+                type="checkbox"
+                name="active"
+                checked={formData.active}
+                onChange={handleChange}
+              />
+              <span>Promoção Ativa</span>
+            </label>
           </div>
 
           {/* SEÇÃO DE ITENS */}
@@ -531,75 +551,38 @@ export const PromotionForm: React.FC<PromotionFormProps> = ({
                     </div>
                   ))}
                 </div>
+
+                {/* Resumo da promoção */}
+                <div className={styles.promotionSummary}>
+                  <h4>Resumo da Promoção</h4>
+                  <div className={styles.summaryRow}>
+                    <span>Total original:</span>
+                    <strong>{formatCurrency(calculateTotalOriginal())}</strong>
+                  </div>
+                  
+                  {impliedDiscount && formData.combo_price && (
+                    <div className={styles.summaryRow}>
+                      <span>Desconto implícito:</span>
+                      <strong className={styles.discountAmount}>{impliedDiscount}%</strong>
+                    </div>
+                  )}
+                  
+                  {!formData.combo_price && formData.discount_percentage ? (
+                    <div className={styles.summaryRow}>
+                      <span>Desconto ({formData.discount_percentage}%):</span>
+                      <strong className={styles.discountAmount}>
+                        -{formatCurrency(calculateTotalOriginal() * (formData.discount_percentage / 100))}
+                      </strong>
+                    </div>
+                  ) : null}
+                  
+                  <div className={`${styles.summaryRow} ${styles.totalRow}`}>
+                    <span>Total com desconto:</span>
+                    <strong>{formatCurrency(calculateDiscountedTotal())}</strong>
+                  </div>
+                </div>
               </>
             )}
-          </div>
-
-          {/* Seção de Desconto e Resumo */}
-          <div className={styles.discountSummarySection}>
-            <h3>Desconto e Resumo</h3>
-            
-            <div className={styles.discountRow}>
-              <div className={styles.formGroup}>
-                <label htmlFor="discount_percentage">Desconto (%)</label>
-                <input
-                  type="number"
-                  id="discount_percentage"
-                  name="discount_percentage"
-                  value={formData.discount_percentage === null ? '' : formData.discount_percentage}
-                  onChange={handleChange}
-                  min="0"
-                  max="100"
-                  step="0.1"
-                  placeholder="0"
-                  className={styles.input}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="combo_price">Preço do Combo (opcional)</label>
-                <input
-                  type="number"
-                  id="combo_price"
-                  name="combo_price"
-                  value={formData.combo_price === null ? '' : formData.combo_price}
-                  onChange={handleChange}
-                  step="0.01"
-                  min="0"
-                  placeholder="R$ 0,00"
-                  className={styles.input}
-                />
-              </div>
-            </div>
-
-            {/* Resumo da promoção */}
-            <div className={styles.promotionSummary}>
-              <div className={styles.summaryRow}>
-                <span>Total original:</span>
-                <strong>{formatCurrency(calculateTotalOriginal())}</strong>
-              </div>
-              
-              {impliedDiscount && formData.combo_price && (
-                <div className={styles.summaryRow}>
-                  <span>Desconto implícito:</span>
-                  <strong className={styles.discountAmount}>{impliedDiscount}%</strong>
-                </div>
-              )}
-              
-              {!formData.combo_price && formData.discount_percentage ? (
-                <div className={styles.summaryRow}>
-                  <span>Desconto ({formData.discount_percentage}%):</span>
-                  <strong className={styles.discountAmount}>
-                    -{formatCurrency(calculateTotalOriginal() * (formData.discount_percentage / 100))}
-                  </strong>
-                </div>
-              ) : null}
-              
-              <div className={`${styles.summaryRow} ${styles.totalRow}`}>
-                <span>Total com desconto:</span>
-                <strong>{formatCurrency(calculateDiscountedTotal())}</strong>
-              </div>
-            </div>
           </div>
 
           <div className={styles.formActions}>

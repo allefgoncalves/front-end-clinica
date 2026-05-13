@@ -46,10 +46,92 @@ cd sistema-desktop
 yarn install
 yarn dev
 ```
-
 Acesse: http://localhost:5173
 
-## Funcionalidades
+# Procedimentos para rodar a aplicação
+
+## Procedimento Local (recomendado para desenvolvimento)
+### Backend
+  1. Configure o `.env` do backend:
+  ```python
+    CORS_ORIGINS = [
+        "http://localhost:5173"
+    ]
+  ```
+  2. Inicie o backend:
+
+  ```bash
+    uvicorn server:app --host 127.0.0.1 --port 8001 --reload
+  ```
+  3. Verifique se está rodando: http://localhost:8001/docs
+
+### Frontend
+  1. Configure o .env do frontend:
+
+  ```bash
+    VITE_API_URL=http://localhost:8001/api
+  ```
+  2. Inicie o frontend:
+
+  ```bash
+    npm run dev
+  ```
+
+  3. Acesse: http://localhost:5173
+
+## Procedimento com Cloudflared (acesso externo)
+### Backend (1º)
+  1. Inicie o backend:
+   
+  ```bash
+    uvicorn server:app --host 127.0.0.1 --port 8001 --reload
+  ```
+  2. Exponha o backend com cloudflared:
+
+  ```bash
+    cloudflared tunnel --url http://localhost:8001
+  ```
+  3. Copie a URL gerada (ex: https://xxx.trycloudflare.com)
+
+  4. Configure o .env do frontend:
+  ```bash
+    VITE_API_URL=https://xxx.trycloudflare.com/api
+  ```
+### Frontend (2º)
+  1. Inicie o frontend:
+  
+  ```bash
+    npm run dev
+  ```
+  2. Exponha o frontend com cloudflared:
+
+  ```bash
+    cloudflared tunnel --url http://localhost:5173
+  ```
+  3. Copie a URL gerada (ex: https://yyy.trycloudflare.com)
+  
+  4. Configure o .env do backend com a URL do frontend para CORS:
+
+  ```python
+    CORS_ORIGINS = [
+        "http://localhost:5173",
+        "https://yyy.trycloudflare.com"
+    ]
+  ```
+  5. Reinicie o backend
+
+  6. Acesse o frontend pela URL do cloudflared: https://yyy.trycloudflare.com
+
+### Observações importantes
+  * No procedimento local, não é necessário cloudflared
+
+  * No procedimento com cloudflared, as URLs mudam a cada execução
+
+  * Sempre reinicie o backend após alterar o .env
+
+  * O backend deve estar rodando antes do frontend em ambos os procedimentos
+
+# Funcionalidades
 
 ### 1. Dashboard
 - Estatísticas gerais

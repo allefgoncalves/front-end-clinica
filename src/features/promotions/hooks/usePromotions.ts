@@ -88,22 +88,22 @@ export const usePromotions = () => {
   }, [filters, sortField, sortOrder, pagination.page, pagination.limit]);
 
   // Carregar itens disponíveis
-const loadAvailableItems = useCallback(async () => {
-  setLoadingItems(true);
-  console.log('🔍 Carregando TODOS os itens disponíveis...');
-  try {
-    const { services, products } = await promotionsService.getAllAvailableItems();
-    console.log('✅ Serviços carregados:', services.length);
-    console.log('✅ Produtos carregados:', products.length);
-    
-    setAvailableServices(services);
-    setAvailableProducts(products);
-  } catch (error) {
-    console.error('❌ Erro ao carregar itens disponíveis:', error);
-  } finally {
-    setLoadingItems(false);
-  }
-}, []);
+  const loadAvailableItems = useCallback(async () => {
+    setLoadingItems(true);
+    console.log('🔍 Carregando TODOS os itens disponíveis...');
+    try {
+      const { services, products } = await promotionsService.getAllAvailableItems();
+      console.log('✅ Serviços carregados:', services.length);
+      console.log('✅ Produtos carregados:', products.length);
+      
+      setAvailableServices(services);
+      setAvailableProducts(products);
+    } catch (error) {
+      console.error('❌ Erro ao carregar itens disponíveis:', error);
+    } finally {
+      setLoadingItems(false);
+    }
+  }, []);
 
   // Carregar itens automaticamente quando o hook for montado
   useEffect(() => {
@@ -168,12 +168,20 @@ const loadAvailableItems = useCallback(async () => {
 
   const handleFormSave = async (data: PromotionCreate) => {
     try {
+      // CORREÇÃO: Garantir que os itens tenham quantidade
+      const itemsWithQuantity = data.items.map(item => ({
+        ...item,
+        quantity: item.quantity || 1
+      }));
+      
+      const dataToSave = { ...data, items: itemsWithQuantity };
+      
       if (selectedPromotion) {
-        const updated = await promotionsService.update(selectedPromotion.id, data);
+        const updated = await promotionsService.update(selectedPromotion.id, dataToSave);
         setPromotions(prev => prev.map(p => p.id === selectedPromotion.id ? updated : p));
         setSelectedPromotion(null);
       } else {
-        const created = await promotionsService.create(data);
+        const created = await promotionsService.create(dataToSave);
         setPromotions(prev => [created, ...prev]);
       }
       setShowForm(false);

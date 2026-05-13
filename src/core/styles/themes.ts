@@ -6,7 +6,7 @@ export type ThemeMode = 'light' | 'dark';
 
 export const lightTheme = {
   colors: {
-    background: '#f8f5f0',
+    background: '#7d9d7d',
     sidebar: '#f0eae2',
     sidebarBorder: '#e0d6cc',
     textPrimary: '#2c3e50',

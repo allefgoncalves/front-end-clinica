@@ -8,15 +8,19 @@
   box-sizing: border-box;
 }
 
+html {
+  min-width: 352px;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--background);
   color: var(--textPrimary);
   transition: var(--transition-smooth);
   line-height: 1.6;
+  min-width: 352px;
 }
 
-/* Scrollbar personalizada já está no scrollbar.css, mas vamos garantir */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
