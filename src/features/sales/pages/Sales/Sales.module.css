@@ -2,8 +2,8 @@
 .container {
   padding: var(--spacing-md) var(--spacing-lg);
   width: 100%;
-  max-width: none;
-  margin: 0;
+  max-width: 1400px;
+  margin: 0 auto;
   animation: fadeIn 0.5s ease-out;
   height: auto; /* CORREÇÃO 1: Altura automática */
   min-height: 100%;

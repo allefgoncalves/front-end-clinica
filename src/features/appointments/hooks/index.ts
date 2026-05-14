@@ -1,2 +1,2 @@
-// src/features/carts/hooks/index.ts
-export { useCarts } from './useCarts';
+// src/features/appointments/hooks/index.ts
+export { useAppointments } from './useAppointments';

@@ -9,6 +9,8 @@
 
 .header {
   height: 75px;
+  width: min(100%, 1500px);
+  margin: 0 auto;
   background: linear-gradient(90deg, var(--sidebar) 0%, var(--navHover) 100%);
   border-bottom: 2px solid var(--sidebarBorder);
   display: flex;
@@ -195,12 +197,7 @@
   border-radius: 12px 12px 0 0;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: all 0.2s ease;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  position: relative;
+
   font-size: var(--font-size-sm);
   flex-shrink: 0;
   overflow: hidden;
@@ -229,7 +226,6 @@
 .navLink:hover {
   color: var(--accent);
   background: rgba(125, 157, 125, 0.2);
-  transform: translateY(-2px);
 }
 
 .navLink.active {
@@ -522,8 +518,10 @@
 }
 
 .main {
+  max-width: 1500px;
+  width: min(100%, 1500px);
+  margin: 0 auto;
   flex: 1;
-  padding: 12px;
   overflow: auto;
   background: var(--background);
   transition: var(--transition-smooth);
