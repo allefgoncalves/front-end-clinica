@@ -95,7 +95,8 @@ export const servicesService = {
 
   async getCategories(): Promise<string[]> {
     const response = await api.get('/services/categories/list');
-    return response.data.categories;
+    if (Array.isArray(response.data)) return response.data;
+    return response.data?.categories || [];
   }
 };
 

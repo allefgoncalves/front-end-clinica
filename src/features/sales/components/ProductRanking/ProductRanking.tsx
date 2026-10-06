@@ -19,8 +19,8 @@ interface ProductRankingProps {
 }
 
 export const ProductRanking: React.FC<ProductRankingProps> = ({
-  topProducts = [], // CORRIGIDO: valor padrão
-  bottomProducts = [], // CORRIGIDO: valor padrão
+  topProducts = [], 
+  bottomProducts = [], 
   dateRange
 }) => {
   const formatCurrency = (value: number) => {

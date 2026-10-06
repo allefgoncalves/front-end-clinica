@@ -13,7 +13,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAuthStore();
+  const { user, logout, tenant, branding, hasPermission } = useAuthStore();
   const { theme, toggleTheme } = useTheme();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -50,6 +50,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     navigate('/login');
   };
 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (branding.primary_color) {
+      root.style.setProperty('--accent', branding.primary_color);
+    } else {
+      root.style.removeProperty('--accent');
+    }
+
+    if (branding.secondary_color) {
+      root.style.setProperty('--sidebar', branding.secondary_color);
+      root.style.setProperty('--navHover', branding.secondary_color);
+    } else {
+      root.style.removeProperty('--sidebar');
+      root.style.removeProperty('--navHover');
+    }
+  }, [branding]);
+
   const notifications = [
     { id: 1, type: 'low-stock', title: 'Estoque Baixo', message: 'Óleo Essencial Lavanda com apenas 5 unidades', time: '5 min' },
     { id: 2, type: 'expiring', title: 'Produto Vencendo', message: 'Creme Corporal vence em 3 dias', time: '1 hora' },
@@ -57,14 +75,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   ];
 
   const navItems = [
-    { path: '/', label: 'Dashboard', icon: '📊' },
-    { path: '/services', label: 'Serviços', icon: '💆' },
-    { path: '/products', label: 'Produtos', icon: '📦' },
-    { path: '/appointments', label: 'Agendamentos', icon: '📅' },
-    { path: '/carts', label: 'Carrinhos', icon: '🛒' },
-    { path: '/promotions', label: 'Promoções', icon: '🎯' },
-    { path: '/sales', label: 'Vendas', icon: '💰' },
-    { path: '/goals', label: 'Metas', icon: '🎖️' },
+    { path: '/', label: 'Dashboard', icon: '📊', permission: 'dashboard:view' },
+    { path: '/services', label: 'Serviços', icon: '💆', permission: 'services:view' },
+    { path: '/products', label: 'Produtos', icon: '📦', permission: 'products:view' },
+    { path: '/appointments', label: 'Agendamentos', icon: '📅', permission: 'appointments:view' },
+    { path: '/carts', label: 'Carrinhos', icon: '🛒', permission: 'carts:view' },
+    { path: '/promotions', label: 'Promoções', icon: '🎯', permission: 'promotions:view' },
+    { path: '/sales', label: 'Vendas', icon: '💰', permission: 'sales:view' },
+    { path: '/goals', label: 'Metas', icon: '🎖️', permission: 'goals:view' },
   ];
 
   const currentPageLabel = navItems.find(item => item.path === location.pathname)?.label || 'Painel';
@@ -80,49 +98,53 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               title="Menu de Navegação"
             >
               <img 
-                src={logo} 
-                alt="Prover Logo" 
+                src={branding.logo || logo} 
+                alt={tenant?.name ? `${tenant.name} logo` : 'Prover Logo'} 
                 className={styles.logoImage}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                 }}
               />
-              <span className={styles.logoText}>Prover</span>
+              <span className={styles.logoText}>{tenant?.name || 'Prover'}</span>
             </button>
 
             {logoMenuOpen && (
               <div className={styles.logoDropdown}>
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`${styles.logoDropdownItem} ${
-                      location.pathname === item.path ? styles.active : ''
-                    }`}
-                    onClick={() => setLogoMenuOpen(false)}
-                  >
-                    <span className={styles.logoDropdownLabel}>{item.label}</span>
-                  </Link>
-                ))}
+                {navItems
+                  .filter((item) => hasPermission(item.permission))
+                  .map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`${styles.logoDropdownItem} ${
+                        location.pathname === item.path ? styles.active : ''
+                      }`}
+                      onClick={() => setLogoMenuOpen(false)}
+                    >
+                      <span className={styles.logoDropdownLabel}>{item.label}</span>
+                    </Link>
+                  ))}
               </div>
             )}
           </div>
 
           <div className={styles.navContainer}>
             <nav className={styles.nav}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`${styles.navLink} ${
-                    location.pathname === item.path ? styles.active : ''
-                  }`}
-                  title={item.label}
-                >
-                  <span className={styles.navIcon}>{item.icon}</span>
-                  <span className={styles.navLabel}>{item.label}</span>
-                </Link>
-              ))}
+              {navItems
+                .filter((item) => hasPermission(item.permission))
+                .map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`${styles.navLink} ${
+                      location.pathname === item.path ? styles.active : ''
+                    }`}
+                    title={item.label}
+                  >
+                    <span className={styles.navIcon}>{item.icon}</span>
+                    <span className={styles.navLabel}>{item.label}</span>
+                  </Link>
+                ))}
             </nav>
           </div>
         </div>

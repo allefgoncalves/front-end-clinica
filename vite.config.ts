@@ -28,6 +28,16 @@ export default defineConfig(({ mode }) => {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true
+      },
+      // Proxy para desenvolvimento: encaminha chamadas /api para o backend local
+      // Evita problemas de CORS durante o desenvolvimento local
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:8001',
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, '/api')
+        }
       }
     },
     build: {
@@ -43,7 +53,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': '/src',
-      },
+      }
     },
     preview: {
       port: 5173,

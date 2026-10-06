@@ -7,6 +7,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer
 } from 'recharts';
 import { SalesByDay } from '../../types/dashboard.types';
@@ -21,8 +22,18 @@ export const SalesChart: React.FC<SalesChartProps> = ({ data }) => {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   };
 
+  const parseDate = (dateStr: string) => {
+    if (!dateStr) return new Date();
+    const dateOnly = dateStr.slice(0, 10);
+    const [year, month, day] = dateOnly.split('-').map(Number);
+    if ([year, month, day].every((part) => !Number.isNaN(part))) {
+      return new Date(year, month - 1, day);
+    }
+    return new Date(dateStr);
+  };
+
   const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
+    const date = parseDate(dateStr);
     return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
   };
 
@@ -30,13 +41,17 @@ export const SalesChart: React.FC<SalesChartProps> = ({ data }) => {
     <div className={styles.chart}>
       <h3>📈 Vendas por Dia</h3>
       <div className={styles.chartContainer}>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data}>
+        <ResponsiveContainer width="100%" height={320}>
+          <LineChart
+            data={data}
+            margin={{ top: 5, right: 5, left: 50, bottom: 5 }}
+          >
             <CartesianGrid strokeDasharray="3 3" stroke="var(--sidebarBorder)" />
             <XAxis 
               dataKey="date" 
               tickFormatter={formatDate}
               stroke="var(--textSecondary)"
+              interval="preserveStartEnd"
             />
             <YAxis 
               yAxisId="left"
@@ -49,6 +64,7 @@ export const SalesChart: React.FC<SalesChartProps> = ({ data }) => {
               stroke="var(--textSecondary)"
             />
             <Tooltip 
+              labelFormatter={(value) => formatDate(String(value))}
               contentStyle={{ 
                 backgroundColor: 'var(--sidebar)',
                 border: '1px solid var(--sidebarBorder)',
@@ -56,6 +72,7 @@ export const SalesChart: React.FC<SalesChartProps> = ({ data }) => {
                 color: 'var(--textPrimary)'
               }}
             />
+            <Legend />
             <Line 
               yAxisId="left"
               type="monotone" 

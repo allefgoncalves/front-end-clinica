@@ -69,7 +69,7 @@ const Sales: React.FC = () => {
         />
       )}
 
-      {/* Ranking de produtos - CORRIGIDO: verificação de undefined */}
+      {/* Ranking de produtos */}
       {summary && summary.top_products && summary.top_products.length > 0 && (
         <ProductRanking
           topProducts={summary.top_products || []}

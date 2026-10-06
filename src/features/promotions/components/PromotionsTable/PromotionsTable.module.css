@@ -129,20 +129,15 @@
 }
 
 /* Larguras específicas das colunas */
-.th:nth-child(2), .td:nth-child(2) { width: 15%; } /* Título */
-.th:nth-child(3), .td:nth-child(3) { width: 13%; } /* Descrição */
-.th:nth-child(4), .td:nth-child(4) { width: 12%; }  /* Desconto */
-.th:nth-child(5), .td:nth-child(5) { width: 8%; }  /* Itens */
-.th:nth-child(6), .td:nth-child(6) { width: 10%; } /* Total */
-.th:nth-child(7), .td:nth-child(7) { width: 12%; } /* Válido de */
-.th:nth-child(8), .td:nth-child(8) { width: 12%; } /* Válido até */
-.th:nth-child(9), .td:nth-child(9) { width: 8%; }  /* Status */
-.th:nth-child(10), .td:nth-child(10) { width: 6%; } /* Ações */
-
-.th:nth-child(10), .td:nth-child(10) { 
-  width: 15%; 
-  min-width: 180px;
-}
+.th:nth-child(2),  .td:nth-child(2) { width: 15%; } /* Título */
+.th:nth-child(3),  .td:nth-child(3) { width: 13%; } /* Descrição */
+.th:nth-child(4),  .td:nth-child(4) { width: 12%; }  /* Desconto */
+.th:nth-child(5),  .td:nth-child(5) { width:  8%; }  /* Itens */
+.th:nth-child(6),  .td:nth-child(6) { width: 10%; } /* Total */
+.th:nth-child(7),  .td:nth-child(7) { width: 12%; } /* Válido de */
+.th:nth-child(8),  .td:nth-child(8) { width: 12%; } /* Válido até */
+.th:nth-child(9),  .td:nth-child(9) { width:  8%; }  /* Status */
+.th:nth-child(10), .td:nth-child(10){ width: 13%; } /* Ações */
 
 .actions {
   display: flex;

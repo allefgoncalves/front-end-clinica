@@ -9,7 +9,8 @@ import { Appointments } from '../features/appointments/pages/Appointments';
 import { Carts } from '../features/carts/pages/Carts';
 import { Promotions } from '../features/promotions/pages/Promotions';
 import { Sales } from '../features/sales/pages/Sales';
-import { Goals } from '../features/goals/pages/Goals';  
+import { Goals } from '../features/goals/pages/Goals';
+import { Unauthorized } from '../features/auth/pages/Unauthorized';
 import Layout from '../core/components/Layout/Layout';
 import { Outlet } from 'react-router-dom';
 
@@ -27,9 +28,10 @@ export const AppRoutes = () => {
           <Route path="/carts" element={<Carts />} />
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/sales" element={<Sales />} />
-          <Route path="/goals" element={<Goals />} />  
+          <Route path="/goals" element={<Goals />} />
         </Route>
       </Route>
+      <Route path="/unauthorized" element={<Unauthorized />} />
     </Routes>
   );
 };

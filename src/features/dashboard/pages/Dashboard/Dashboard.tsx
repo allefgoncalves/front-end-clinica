@@ -148,22 +148,6 @@ const Dashboard: React.FC = () => {
         <LowStockAlert products={displayData.lists.low_stock_products} />
         <ExpiringProducts products={displayData.lists.expiring_products} />
       </div>
-
-      {displayData.alerts.length > 0 && (
-        <div className={styles.alerts}>
-          {displayData.alerts.map((alert, index) => (
-            <div key={index} className={`${styles.alert} ${styles[alert.severity]}`}>
-              <span className={styles.alertIcon}>
-                {alert.type === 'low_stock' && '⚠️'}
-                {alert.type === 'expiring' && '⏳'}
-                {alert.type === 'promotion' && '🏷️'}
-              </span>
-              <span className={styles.alertMessage}>{alert.message}</span>
-              <a href={alert.link} className={styles.alertLink}>Ver</a>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

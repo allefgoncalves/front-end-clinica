@@ -95,7 +95,9 @@ export const productsService = {
 
   async getCategories(): Promise<string[]> {
     const response = await api.get('/products/categories/list');
-    return response.data.categories;
+    // backend may return { categories: [...] } or an array directly
+    if (Array.isArray(response.data)) return response.data;
+    return response.data?.categories || [];
   }
 };
 

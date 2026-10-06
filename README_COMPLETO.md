@@ -86,8 +86,12 @@ Acesse: http://localhost:5173
   ```bash
     uvicorn server:app --host 127.0.0.1 --port 8001 --reload
   ```
-  2. Exponha o backend com cloudflared:
-
+  2. cloudflared:
+  2.1 caso não tenha instalado rode o comando no terminal
+  ```bash
+    winget install --id Cloudflare.cloudflared
+  ```
+  2.2 Exponha o backend com cloudflared:
   ```bash
     cloudflared tunnel --url http://localhost:8001
   ```

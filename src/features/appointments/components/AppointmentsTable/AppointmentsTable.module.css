@@ -8,8 +8,9 @@
   box-shadow: var(--shadow-md);
   overflow: hidden;
   position: relative;
+  margin-top: var(--spacing-sm);
   border: 1px solid var(--sidebarBorder);
-  min-width: 1000px;
+  height: 100%;
 }
 
 .tableContainer {
@@ -19,6 +20,7 @@
   overflow: hidden;
   background: var(--sidebar);
   position: relative;
+  height: 100%;
 }
 
 .tableHeader {
@@ -62,11 +64,13 @@
   border-bottom: 2px solid var(--accent);
 }
 
+.thExpand.tdExpand{
+
+}
+
 .thExpand {
-  width: 40px !important;
-  min-width: 40px !important;
-  max-width: 40px !important;
-  padding: var(--spacing-sm) 0;
+  width: 40px;
+  padding: var(--spacing-sm) var(--spacing-xs);
   color: var(--textPrimary);
   font-weight: 600;
   font-size: var(--font-size-sm);
@@ -75,6 +79,16 @@
   text-align: center;
   background: var(--navActive);
   border-bottom: 2px solid var(--accent);
+}
+
+.tdExpand {
+  width: 40px;
+  padding: var(--spacing-sm) var(--spacing-xs);
+  color: var(--textPrimary);
+  border-bottom: 1px solid var(--sidebarBorder);
+  vertical-align: middle;
+  text-align: center;
+  background: var(--sidebar);
 }
 
 .th.sortable {
@@ -118,27 +132,15 @@
   background: var(--sidebar);
 }
 
-.tdExpand {
-  width: 40px !important;
-  min-width: 40px !important;
-  max-width: 40px !important;
-  padding: var(--spacing-sm) 0;
-  color: var(--textPrimary);
-  border-bottom: 1px solid var(--sidebarBorder);
-  vertical-align: middle;
-  text-align: center;
-  background: var(--sidebar);
-}
-
 /* Larguras específicas das colunas */
 .th:nth-child(2), .td:nth-child(2) { width: 12%; } /* Cliente */
 .th:nth-child(3), .td:nth-child(3) { width: 15%; } /* Contato */
 .th:nth-child(4), .td:nth-child(4) { width: 12%; } /* Data/Hora */
-.th:nth-child(5), .td:nth-child(5) { width: 8%; }  /* Serviços */
+.th:nth-child(5), .td:nth-child(5) { width:  8%; }  /* Serviços */
 .th:nth-child(6), .td:nth-child(6) { width: 10%; } /* Total */
 .th:nth-child(7), .td:nth-child(7) { width: 10%; } /* Status */
 .th:nth-child(8), .td:nth-child(8) { width: 10%; } /* Massagista */
-.th:nth-child(9), .td:nth-child(9) { width: 8%; } /* Ações */
+.th:nth-child(9), .td:nth-child(9) { width: 15%; } /* Ações */
 
 .tableRow {
   transition: var(--transition-smooth);
@@ -154,13 +156,13 @@
 }
 
 .expandButton {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border: none;
   background: transparent;
   color: var(--textSecondary);
   cursor: pointer;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,9 +233,11 @@
 
 .actions {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  min-width: 160px; /* keep space for action buttons */
 }
 
 .editBtn,

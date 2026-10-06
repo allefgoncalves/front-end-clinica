@@ -56,9 +56,9 @@
 }
 
 .list {
-  padding: var(--spacing-md);
-  max-height: 300px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .item {
@@ -130,24 +130,6 @@
   padding: var(--spacing-xl);
   color: var(--textSecondary);
   font-style: italic;
-}
-
-/* Scrollbar personalizada */
-.list::-webkit-scrollbar {
-  width: 6px;
-}
-
-.list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background: var(--accentSoft);
-  border-radius: var(--border-radius-full);
-}
-
-.list::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
 }
 
 @media (max-width: 768px) {
