@@ -6,7 +6,8 @@
   import { onMount } from 'svelte';
   import '../styles/global.css';
 
-  let ready = false;
+  let checkingSession = true;
+  let sessionAllowed = false;
   const links = [
     { href: `${base}/`, label: 'Dashboard', icon: '▦' },
     { href: `${base}/services`, label: 'Serviços', icon: '✦' },
@@ -15,8 +16,20 @@
   ];
 
   onMount(() => {
-    ready = true;
-    if (!$page.url.pathname.endsWith('/login') && !isAuthenticated()) goto(`${base}/login`);
+    const isLoginPage = $page.url.pathname.endsWith('/login');
+
+    if (isLoginPage) {
+      checkingSession = false;
+      return;
+    }
+
+    if (!isAuthenticated()) {
+      goto(`${base}/login`, { replaceState: true });
+      return;
+    }
+
+    sessionAllowed = true;
+    checkingSession = false;
   });
 
   function signOut() {
@@ -25,11 +38,11 @@
   }
 </script>
 
-{#if !ready}
+{#if checkingSession}
   <div class="boot">Carregando...</div>
-{:else if $page.url.pathname.startsWith('/login')}
+{:else if $page.url.pathname.endsWith('/login')}
   <slot />
-{:else}
+{:else if sessionAllowed}
   <div class="shell">
     <aside class="sidebar">
       <a class="brand" href={`${base}/`}>
@@ -65,4 +78,6 @@
       <slot />
     </main>
   </div>
+{:else}
+  <div class="boot">Redirecionando para o login...</div>
 {/if}

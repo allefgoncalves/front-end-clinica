@@ -1,0 +1,22 @@
+ACESSO DO FRONTEND
+
+URL:
+https://allefgoncalves.github.io/front-end-clinica/
+
+LOGIN DE TESTE:
+E-mail: admin@prover.com
+Senha: 123456
+
+API FAKE:
+A API fake está integrada no frontend e usa os dados de:
+frontend-svelte/src/lib/mock-data.json
+
+As alterações feitas durante os testes são armazenadas no localStorage do navegador.
+
+STATUS:
+- GitHub Pages publicado
+- Build aprovado
+- Deploy aprovado
+- API fake funcionando no navegador
+
+Para limpar os dados alterados durante os testes, limpe o localStorage do domínio no navegador.

@@ -31,7 +31,9 @@ export function logout() {
 }
 
 export function isAuthenticated() {
-  return browser && Boolean(localStorage.getItem('access_token'));
+  return browser && Boolean(
+    localStorage.getItem('access_token') && localStorage.getItem('user')
+  );
 }
 
 function decodeTenant(token) {
