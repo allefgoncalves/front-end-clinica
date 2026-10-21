@@ -2,9 +2,7 @@
 node_modules/
 .pnp
 .pnp.js
-yarn.lock
-package-lock.json
-pnpm-lock.yaml
+# Lockfiles are committed for reproducible CI builds.
 
 # === BUILD ===
 dist/
@@ -71,6 +69,7 @@ junit.xml
 # === CACHE ===
 .cache/
 .vite/
+.svelte-kit/
 .turbo/
 .eslintcache
 .stylelintcache

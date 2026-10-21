@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "email": "admin@prover.com",
+      "password": "123456",
+      "name": "Administrador Prover",
+      "role": "admin",
+      "tenant_id": "tenant-prover"
+    }
+  ],
+  "clients": [
+    {
+      "id": "client-001",
+      "name": "Mariana Costa",
+      "email": "mariana@example.com",
+      "phone": "+55 11 98888-1111"
+    },
+    {
+      "id": "client-002",
+      "name": "Rafael Lima",
+      "email": "rafael@example.com",
+      "phone": "+55 11 97777-2222"
+    }
+  ],
+  "services": [
+    { "id": "service-001", "name": "Massagem relaxante", "category": "Massagem", "duration_minutes": 60, "price": 150, "active": true },
+    { "id": "service-002", "name": "Drenagem linfática", "category": "Terapias", "duration_minutes": 50, "price": 135, "active": true },
+    { "id": "service-003", "name": "Limpeza de pele", "category": "Estética", "duration_minutes": 75, "price": 190, "active": true },
+    { "id": "service-004", "name": "Massagem terapêutica", "category": "Massagem", "duration_minutes": 60, "price": 175, "active": false }
+  ],
+  "products": [
+    { "id": "product-001", "name": "Óleo essencial de lavanda", "category": "Óleos", "price": 45, "stock": 18, "active": true },
+    { "id": "product-002", "name": "Creme hidratante corporal", "category": "Cuidados", "price": 62, "stock": 7, "active": true },
+    { "id": "product-003", "name": "Vela aromática", "category": "Ambiente", "price": 39, "stock": 24, "active": true }
+  ],
+  "appointments": [
+    { "id": "appointment-001", "client_id": "client-001", "client_name": "Mariana Costa", "service_id": "service-001", "service_name": "Massagem relaxante", "scheduled_date": "2026-10-21T09:30:00", "status": "confirmed" },
+    { "id": "appointment-002", "client_id": "client-002", "client_name": "Rafael Lima", "service_id": "service-002", "service_name": "Drenagem linfática", "scheduled_date": "2026-10-21T11:00:00", "status": "pending" },
+    { "id": "appointment-003", "client_id": "client-001", "client_name": "Mariana Costa", "service_id": "service-003", "service_name": "Limpeza de pele", "scheduled_date": "2026-10-21T14:30:00", "status": "confirmed" }
+  ],
+  "sales": [
+    { "id": "sale-001", "client_id": "client-001", "client_name": "Mariana Costa", "total": 195, "status": "paid", "payment_status": "paid", "created_at": "2026-10-21T08:45:00" },
+    { "id": "sale-002", "client_id": "client-002", "client_name": "Rafael Lima", "total": 135, "status": "pending", "payment_status": "pending", "created_at": "2026-10-20T16:20:00" }
+  ],
+  "carts": [
+    { "id": "cart-001", "client_id": "client-001", "client_name": "Mariana Costa", "items": [{ "item_id": "product-001", "name": "Óleo essencial de lavanda", "price": 45, "quantity": 2 }], "total": 90, "status": "active", "metadata": { "notes": "Cliente prefere contato pela manhã" } },
+    { "id": "cart-002", "client_id": "client-002", "client_name": "Rafael Lima", "items": [{ "item_id": "product-002", "name": "Creme hidratante corporal", "price": 62, "quantity": 1 }], "total": 62, "status": "abandoned", "metadata": { "notes": "", "discount_applied": 0 } }
+  ],
+  "promotions": [
+    { "id": "promotion-001", "title": "Bem-estar em dobro", "discount_percent": 15, "active": true, "starts_at": "2026-10-01", "ends_at": "2026-10-31", "items": ["service-001", "product-001"] }
+  ],
+  "goals": [
+    { "id": "goal-001", "title": "Receita de outubro", "target": 20000, "current": 15840, "status": "active", "period": "2026-10" }
+  ]
+}
