@@ -31,7 +31,12 @@ function paginated(items, url) {
   const page = Number(url.searchParams.get('page') || 1);
   const limit = Number(url.searchParams.get('limit') || 20);
   const search = (url.searchParams.get('search') || '').toLowerCase();
-  const filtered = search ? items.filter((item) => JSON.stringify(item).toLowerCase().includes(search)) : items;
+  let filtered = search ? items.filter((item) => JSON.stringify(item).toLowerCase().includes(search)) : items;
+  const active = url.searchParams.get('active');
+  const category = url.searchParams.get('category');
+  if (active !== null) filtered = filtered.filter((item) => item.active === (active === 'true'));
+  if (category) filtered = filtered.filter((item) => item.category === category);
+  if (url.searchParams.get('low_stock') === 'true') filtered = filtered.filter((item) => Number(item.stock) <= 8);
   const start = (page - 1) * limit;
   return { items: filtered.slice(start, start + limit), total: filtered.length, page, pages: Math.max(1, Math.ceil(filtered.length / limit)), limit };
 }
