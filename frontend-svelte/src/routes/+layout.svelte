@@ -1,9 +1,8 @@
 <script>
   import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
+  import { afterNavigate, goto } from '$app/navigation';
   import { base } from '$app/paths';
   import { user, logout, isAuthenticated } from '$lib/auth.js';
-  import { onMount } from 'svelte';
   import '../styles/global.css';
 
   let checkingSession = true;
@@ -16,8 +15,10 @@
     { href: `${base}/sales`, label: 'Vendas', icon: '↗' }
   ];
 
-  onMount(() => {
-    const isLoginPage = $page.url.pathname.endsWith('/login');
+  function checkSession(pathname = $page.url.pathname) {
+    const currentPath = pathname.replace(/\/+$/, '') || '/';
+    const loginPath = `${base}/login`.replace(/\/+$/, '');
+    const isLoginPage = currentPath === loginPath;
 
     if (isLoginPage) {
       checkingSession = false;
@@ -31,7 +32,9 @@
 
     sessionAllowed = true;
     checkingSession = false;
-  });
+  }
+
+  afterNavigate(({ to }) => checkSession(to?.url.pathname));
 
   function signOut() {
     logout();
@@ -41,7 +44,7 @@
 
 {#if checkingSession}
   <div class="boot">Carregando...</div>
-{:else if $page.url.pathname.endsWith('/login')}
+{:else if ($page.url.pathname.replace(/\/+$/, '') || '/') === `${base}/login`.replace(/\/+$/, '')}
   <slot />
 {:else if sessionAllowed}
   <div class="shell">
