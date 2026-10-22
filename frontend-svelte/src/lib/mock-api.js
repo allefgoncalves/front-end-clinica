@@ -59,6 +59,7 @@ export function mockRequest(path, options = {}) {
   if (url.pathname === '/auth/me') return Promise.resolve(publicUser(data.users[0]));
   if (url.pathname === '/auth/logout' || url.pathname === '/auth/refresh') return Promise.resolve({ message: 'ok' });
   if (url.pathname === '/tenants/config') return Promise.resolve({ tenant: { id: 'tenant-prover', name: 'Prover Clínica', slug: 'prover' }, branding: { logo: null, primary_color: '#b97e42', secondary_color: '#25221f' }, permissions: ['*'] });
+  if (url.pathname === '/clients') return Promise.resolve(paginated(data.clients, url));
   if (url.pathname === '/dashboard' || url.pathname === '/dashboard/stats') return Promise.resolve(dashboard(data));
   if (url.pathname === '/cart/admin/snapshots') return Promise.resolve(paginated(data.carts, url));
   if (url.pathname.match(/^\/cart\/admin\/snapshots\/[^/]+\/discount$/) && method === 'POST') {
@@ -87,7 +88,18 @@ export function mockRequest(path, options = {}) {
     return Promise.resolve(paginated(values, url));
   }
 
-  if (method === 'POST') {
+  if (method === 'POST' && !url.pathname.endsWith('/cancel')) {
+    if (collection.name === 'appointments') {
+      const client = data.clients.find((item) => item.id === body.client_id);
+      const service = data.services.find((item) => item.id === body.service_id && item.active !== false);
+      if (!client || !service || !body.scheduled_date) responseError('Cliente, serviço e data são obrigatórios', 422);
+      const conflict = values.some((item) => item.status !== 'cancelled' && item.scheduled_date === body.scheduled_date);
+      if (conflict) responseError('Já existe um agendamento neste horário', 409);
+      const item = { id: `appointment-${Date.now()}`, ...body, client_name: client.name, service_name: service.name, notes: body.notes || null };
+      values.unshift(item);
+      save(data);
+      return Promise.resolve(item);
+    }
     const item = { id: `${collection.name.slice(0, -1)}-${Date.now()}`, ...body, active: body.active ?? true };
     values.unshift(item);
     save(data);
@@ -97,6 +109,10 @@ export function mockRequest(path, options = {}) {
   if (method === 'PUT' || method === 'PATCH') {
     const index = values.findIndex((item) => item.id === collection.id);
     if (index < 0) responseError('Registro não encontrado', 404);
+    if (collection.name === 'appointments' && body.scheduled_date) {
+      const conflict = values.some((item, itemIndex) => itemIndex !== index && item.status !== 'cancelled' && item.scheduled_date === body.scheduled_date);
+      if (conflict) responseError('Já existe um agendamento neste horário', 409);
+    }
     values[index] = { ...values[index], ...body };
     save(data);
     return Promise.resolve(values[index]);
@@ -106,6 +122,14 @@ export function mockRequest(path, options = {}) {
     data[collection.name] = values.filter((item) => item.id !== collection.id);
     save(data);
     return Promise.resolve({ message: 'Registro removido' });
+  }
+
+  if (collection.name === 'appointments' && collection.id && method === 'POST' && url.pathname.endsWith('/cancel')) {
+    const index = values.findIndex((item) => item.id === collection.id);
+    if (index < 0) responseError('Agendamento não encontrado', 404);
+    values[index] = { ...values[index], status: 'cancelled' };
+    save(data);
+    return Promise.resolve({ message: 'Agendamento cancelado', status: 'cancelled' });
   }
 
   responseError(`Método fake não implementado: ${method}`, 405);
