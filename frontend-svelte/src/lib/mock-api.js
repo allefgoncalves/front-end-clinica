@@ -37,6 +37,14 @@ function paginated(items, url) {
   if (active !== null) filtered = filtered.filter((item) => item.active === (active === 'true'));
   if (category) filtered = filtered.filter((item) => item.category === category);
   if (url.searchParams.get('low_stock') === 'true') filtered = filtered.filter((item) => Number(item.stock) <= 8);
+  const year = url.searchParams.get('year');
+  const month = url.searchParams.get('month');
+  const status = url.searchParams.get('status');
+  const type = url.searchParams.get('type');
+  if (year) filtered = filtered.filter((item) => String(item.year || item.period?.slice(0, 4)) === year);
+  if (month) filtered = filtered.filter((item) => String(item.month || item.period?.slice(5, 7)) === month);
+  if (status) filtered = filtered.filter((item) => item.status === status);
+  if (type) filtered = filtered.filter((item) => item.type === type);
   const start = (page - 1) * limit;
   return { items: filtered.slice(start, start + limit), total: filtered.length, page, pages: Math.max(1, Math.ceil(filtered.length / limit)), limit };
 }
@@ -60,6 +68,8 @@ export function mockRequest(path, options = {}) {
   if (url.pathname === '/auth/logout' || url.pathname === '/auth/refresh') return Promise.resolve({ message: 'ok' });
   if (url.pathname === '/tenants/config') return Promise.resolve({ tenant: { id: 'tenant-prover', name: 'Prover Clínica', slug: 'prover' }, branding: { logo: null, primary_color: '#b97e42', secondary_color: '#25221f' }, permissions: ['*'] });
   if (url.pathname === '/clients') return Promise.resolve(paginated(data.clients, url));
+  if (url.pathname === '/goals/current') return Promise.resolve(data.goals.filter((goal) => goal.status === 'active').map(goalView));
+  if (url.pathname === '/goals/history') return Promise.resolve({ history: data.goals.map((goal) => ({ year: goal.year || Number(goal.period?.slice(0, 4)), month: goal.month || Number(goal.period?.slice(5, 7)), revenue_target: goal.type === 'revenue' ? goal.target : 0, revenue_achieved: goal.type === 'revenue' ? goal.current : 0, revenue_progress: goal.type === 'revenue' ? goalView(goal).progress : 0, quantity_target: goal.type === 'quantity' ? goal.target : 0, quantity_achieved: goal.type === 'quantity' ? goal.current : 0, quantity_progress: goal.type === 'quantity' ? goalView(goal).progress : 0 })) });
   if (url.pathname === '/dashboard' || url.pathname === '/dashboard/stats') return Promise.resolve(dashboard(data));
   if (url.pathname === '/cart/admin/snapshots') return Promise.resolve(paginated(data.carts, url));
   if (url.pathname.match(/^\/cart\/admin\/snapshots\/[^/]+\/discount$/) && method === 'POST') {
@@ -89,6 +99,12 @@ export function mockRequest(path, options = {}) {
   }
 
   if (method === 'POST' && !url.pathname.endsWith('/cancel')) {
+    if (collection.name === 'goals') {
+      const item = goalView({ id: `goal-${Date.now()}`, ...body, current: 0, status: 'active' });
+      values.unshift(item);
+      save(data);
+      return Promise.resolve(item);
+    }
     if (collection.name === 'appointments') {
       const client = data.clients.find((item) => item.id === body.client_id);
       const service = data.services.find((item) => item.id === body.service_id && item.active !== false);
@@ -113,7 +129,7 @@ export function mockRequest(path, options = {}) {
       const conflict = values.some((item, itemIndex) => itemIndex !== index && item.status !== 'cancelled' && item.scheduled_date === body.scheduled_date);
       if (conflict) responseError('Já existe um agendamento neste horário', 409);
     }
-    values[index] = { ...values[index], ...body };
+    values[index] = collection.name === 'goals' ? goalView({ ...values[index], ...body }) : { ...values[index], ...body };
     save(data);
     return Promise.resolve(values[index]);
   }
@@ -140,6 +156,12 @@ function publicUser(account) {
   const user = { ...account };
   delete user.password;
   return user;
+}
+
+function goalView(goal) {
+  const target = Number(goal.target || 0);
+  const current = Number(goal.current || 0);
+  return { ...goal, progress: target > 0 ? Math.min(100, (current / target) * 100) : 0, year: goal.year || Number(goal.period?.slice(0, 4)) || new Date().getFullYear(), month: goal.month || Number(goal.period?.slice(5, 7)) || new Date().getMonth() + 1, type: goal.type || 'revenue', unit: goal.unit || 'R$' };
 }
 
 function collectionFor(pathname) {

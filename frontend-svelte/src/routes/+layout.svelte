@@ -12,6 +12,7 @@
     { href: `${base}/services`, label: 'Serviços', icon: '✦' },
     { href: `${base}/products`, label: 'Produtos', icon: '□' },
     { href: `${base}/appointments`, label: 'Agendamentos', icon: '◷' },
+    { href: `${base}/goals`, label: 'Metas', icon: '◎' },
     { href: `${base}/sales`, label: 'Vendas', icon: '↗' }
   ];
 
